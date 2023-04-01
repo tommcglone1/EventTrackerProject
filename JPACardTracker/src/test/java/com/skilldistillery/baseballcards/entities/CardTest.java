@@ -1,7 +1,9 @@
 package com.skilldistillery.baseballcards.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,9 +43,21 @@ class CardTest {
 	}
 
 	@Test
-	void test() {
+	void test_card_entity_mapping() {
 		assertNotNull(card);
 		assertEquals("Ryan Howard", card.getPlayerName());
+		assertEquals("BSA-RH", card.getNumber());
+		assertEquals("Phillies", card.getTeam());
+		assertEquals("Series 1", card.getBoxSet());
+		assertEquals("Stars of MLB", card.getType());
+		assertEquals("https://i.ebayimg.com/images/g/NY8AAOSwSWpj8QMY/s-l1600.jpg", card.getImgURL());
+		assertEquals(2023, card.getYear());
+		assertTrue(card.getAutographed());
+		assertFalse(card.getRookie());
+		assertEquals(16.50, card.getSaleValue());
+		assertEquals(25.50, card.getTradeValue());
+		assertTrue(card.isActive());
+		assertEquals("98/99", card.getSpNumber());
 	}
 
 }
