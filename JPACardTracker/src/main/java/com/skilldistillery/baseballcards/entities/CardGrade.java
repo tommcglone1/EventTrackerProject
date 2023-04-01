@@ -1,14 +1,18 @@
 package com.skilldistillery.baseballcards.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class Grade {
+@Table(name="grade")
+public class CardGrade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +20,10 @@ public class Grade {
 	
 	private String name;
 
-	public Grade() {
+	@OneToMany(mappedBy="grade")
+	private List<Card> cards;
+	
+	public CardGrade() {
 		super();
 	}
 
@@ -35,6 +42,14 @@ public class Grade {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
+	}
 
 	@Override
 	public int hashCode() {
@@ -49,7 +64,7 @@ public class Grade {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Grade other = (Grade) obj;
+		CardGrade other = (CardGrade) obj;
 		return id == other.id;
 	}
 

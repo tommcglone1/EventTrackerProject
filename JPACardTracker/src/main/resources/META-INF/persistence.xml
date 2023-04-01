@@ -9,7 +9,7 @@
     <!-- begin entities -->
 	<class>com.skilldistillery.baseballcards.entities.Card</class>
 	<class>com.skilldistillery.baseballcards.entities.CardCondition</class>
-	<class>com.skilldistillery.baseballcards.entities.Grade</class>
+	<class>com.skilldistillery.baseballcards.entities.CardGrade</class>
 
 
 

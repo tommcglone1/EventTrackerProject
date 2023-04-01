@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -60,6 +62,14 @@ public class Card {
 	private String spNumber;
 	
 	private String parallel;
+	
+	@ManyToOne
+	@JoinColumn(name="card_condition_id")
+	private CardCondition condition;
+	
+	@ManyToOne
+	@JoinColumn(name="grade_id")
+	private CardGrade grade;
 	
 	public Card() {
 		super();
@@ -207,6 +217,23 @@ public class Card {
 
 	public void setParallel(String parallel) {
 		this.parallel = parallel;
+	}
+
+	public CardCondition getCondition() {
+		return condition;
+	}
+
+	public void setCondition(CardCondition condition) {
+		this.condition = condition;
+	}
+	
+
+	public CardGrade getGrade() {
+		return grade;
+	}
+
+	public void setGrade(CardGrade grade) {
+		this.grade = grade;
 	}
 
 	@Override

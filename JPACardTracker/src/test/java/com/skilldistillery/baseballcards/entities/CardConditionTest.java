@@ -47,5 +47,12 @@ class CardConditionTest {
 		assertNotNull(cardCondition);
 		assertEquals("Near Mint or Better", cardCondition.getName());
 	}
+	
+	@Test
+	void test_OneToMany_mapping() {
+		cardCondition = em.find(CardCondition.class, 2);
+		assertNotNull(cardCondition.getCards());
+		assertFalse(cardCondition.getCards().isEmpty());
+	}
 
 }

@@ -15,10 +15,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class GradeTest {
+class CardGradeTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Grade grade;
+	private CardGrade grade;
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -33,7 +33,7 @@ class GradeTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		grade = em.find(Grade.class, 1);
+		grade = em.find(CardGrade.class, 1);
 	}
 
 	@AfterEach
@@ -46,8 +46,13 @@ class GradeTest {
 	void test_card_entity_mapping() {
 		assertNotNull(grade);
 		assertEquals("Poor to Fair", grade.getName());
-		
-		
+	}
+	
+	@Test
+	void test_OneToMany_mapping() {
+		grade = em.find(CardGrade.class, 8);
+		assertNotNull(grade.getCards());
+		assertFalse(grade.getCards().isEmpty());
 	}
 
 }

@@ -59,5 +59,18 @@ class CardTest {
 		assertTrue(card.isActive());
 		assertEquals("98/99", card.getSpNumber());
 	}
+	@Test
+	void test_ManyToOne_CardCondition() {
+		assertNotNull(card);
+		assertNotNull(card.getCondition());
+		assertEquals("Excellent", card.getCondition().getName());
+	}
+	@Test
+	void test_ManyToOne_CardGrade() {
+		card = em.find(Card.class, 2);
+		assertNotNull(card);
+		assertNotNull(card.getGrade());
+		assertEquals("Near Mint-Mint", card.getGrade().getName());
+	}
 
 }
