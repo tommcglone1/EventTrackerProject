@@ -28,7 +28,7 @@ public class Card {
 	
 	private String team;
 	
-	@Column(name="set")
+	@Column(name="box_set")
 	private String boxSet;
 	
 	private String type;
