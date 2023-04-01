@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="card_condition")
 public class CardCondition {
@@ -20,6 +22,7 @@ public class CardCondition {
 	
 	private String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="condition")
 	private List<Card> cards;
 

@@ -20,8 +20,8 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public Card getCard(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
+		Card card = cardRepo.findById(cardId);
+		return card;
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="grade")
 public class CardGrade {
@@ -19,7 +21,8 @@ public class CardGrade {
 	private int id;
 	
 	private String name;
-
+	
+	@JsonIgnore
 	@OneToMany(mappedBy="grade")
 	private List<Card> cards;
 	

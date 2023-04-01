@@ -6,4 +6,5 @@ import com.skilldistillery.baseballcards.entities.Card;
 
 public interface CardRepository extends JpaRepository<Card, Integer>{
 
+	Card findById(int cardId);
 }

@@ -2,8 +2,11 @@ package com.skilldistillery.baseballcards.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +23,14 @@ public class CardController {
 	@GetMapping("baseballcards")
 	public List<Card> getCardList(){
 		return cardService.listAllCards();
-		
+	}
+	
+	@GetMapping("baseballcards/{cardId}")
+	public Card getCard(@PathVariable int cardId, HttpServletResponse response){
+		Card card = cardService.getCard(cardId);
+		if (card == null) {
+			response.setStatus(404);
+		}
+		return card;
 	}
 }
