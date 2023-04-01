@@ -16,10 +16,7 @@ public class CardServiceImpl implements CardService {
 
 	@Autowired
 	private CardRepository cardRepo;
-	@Autowired
-	private CardConditionRepository ccRepo;
-	@Autowired 
-	private CardGradeRepository cgRepo;
+	
 	
 	@Override
 	public List<Card> listAllCards() {
@@ -40,14 +37,38 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public Card update(int cardId, Card card) {
-		// TODO Auto-generated method stub
-		return null;
+		Card original = cardRepo.findById(cardId);
+		original.setPlayerName(card.getPlayerName());
+		original.setNumber(card.getNumber());
+		original.setTeam(card.getTeam());
+		original.setBoxSet(card.getBoxSet());
+		original.setType(card.getType());
+		original.setImgURL(card.getImgURL());
+		original.setYear(card.getYear());
+		original.setAutographed(card.getAutographed());
+		original.setRookie(card.getRookie());
+		original.setManufacturer(card.getManufacturer());
+		original.setSaleValue(card.getSaleValue());
+		original.setTradeValue(card.getTradeValue());
+		original.setActive(card.isActive());
+		original.setSpNumber(card.getSpNumber());
+		original.setParallel(card.getParallel());
+		original.setCondition(card.getCondition());
+		if(card.getGrade() != null) {
+		original.setGrade(card.getGrade());
+		}
+		return cardRepo.saveAndFlush(card);
 	}
 
 	@Override
 	public boolean deleteById(int cardId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		Card toDelete = cardRepo.findById(cardId);
+		if (toDelete != null) {
+			cardRepo.delete(toDelete);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }
