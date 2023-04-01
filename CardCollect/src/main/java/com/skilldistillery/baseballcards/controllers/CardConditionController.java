@@ -17,7 +17,7 @@ public class CardConditionController {
 	@Autowired
 	private CardConditionService cardConditionService;
 	
-	@GetMapping("cardconditions")
+	@GetMapping("conditions")
 	public List<CardCondition> listCardConditions(){
 		return cardConditionService.listConditions();
 	}
