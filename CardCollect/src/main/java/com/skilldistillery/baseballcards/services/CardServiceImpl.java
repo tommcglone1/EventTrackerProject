@@ -73,4 +73,128 @@ public class CardServiceImpl implements CardService {
 		return deleted;
 	}
 
+	@Override
+	public List<Card> findByPlayerNameLikeIgnoreCase(String playerName) {
+		playerName = "%" + playerName + "%";
+		return cardRepo.findByPlayerNameLikeIgnoreCase(playerName);
+	}
+
+	@Override
+	public long countByPlayerNameLikeIgnoreCase(String playerName) {
+		long numberOfCards = cardRepo.countByPlayerNameLikeIgnoreCase(playerName);
+		return numberOfCards;
+	}
+
+	@Override
+	public List<Card> findByTeamIgnoreCase(String teamName) {
+		return cardRepo.findByTeamIgnoreCase(teamName);
+	}
+
+	@Override
+	public long countByTeamIgnoreCase(String teamName) {
+		return cardRepo.countByTeamIgnoreCase(teamName);
+		
+	}
+
+	@Override
+	public List<Card> findByBoxSetAndYear(String boxSet, int year) {
+		return cardRepo.findByBoxSetIgnoreCaseAndYear(boxSet, year);
+	}
+
+	@Override
+	public long countByBoxSetAndYear(String boxSet, int year) {
+		return cardRepo.countByBoxSetIgnoreCaseAndYear(boxSet, year);
+	}
+
+	@Override
+	public List<Card> findByAutographedTrue() {
+		return cardRepo.findByAutographedTrue();
+	}
+
+	@Override
+	public long countByAutographedTrue() {
+		return cardRepo.countByAutographedTrue();
+	}
+
+	@Override
+	public List<Card> findByAutographedFalse() {
+		return cardRepo.findByAutographedFalse();
+	}
+
+	@Override
+	public long countByAutographedFalse() {
+		return cardRepo.countByAutographedFalse();
+	}
+
+	@Override
+	public List<Card> findByRookieTrue() {
+		return cardRepo.findByRookieTrue();
+	}
+
+	@Override
+	public long countByRookieTrue() {
+		return cardRepo.countByRookieTrue();
+	}
+
+	@Override
+	public List<Card> findByRookieFalse() {
+		return cardRepo.findByRookieFalse();
+	}
+
+	@Override
+	public long countByRookieFalse() {
+		return cardRepo.countByRookieFalse();
+	}
+
+	@Override
+	public List<Card> findByManufacturerIgnoreCase(String manufacturer) {
+		return cardRepo.findByManufacturerIgnoreCase(manufacturer);
+	}
+
+	@Override
+	public long countByManufacturerIgnoreCase(String manufacturer) {
+		return cardRepo.countByManufacturerIgnoreCase(manufacturer);
+	}
+
+	@Override
+	public List<Card> findByGrade_IdOrderByPlayerName(Integer gradeId) {
+		return cardRepo.findByGrade_IdOrderByPlayerName(gradeId);
+	}
+
+	@Override
+	public long countByGrade_Id(Integer gradeId) {
+		return cardRepo.countByGrade_Id(gradeId);
+	}
+
+	@Override
+	public List<Card> findByGradeIsNullOrderByPlayerName() {
+		return cardRepo.findByGradeIsNullOrderByPlayerName();
+	}
+
+	@Override
+	public long countByGradeIsNull() {
+		return cardRepo.countByGradeIsNull();
+	}
+
+	@Override
+	public List<Card> findBySaleValueBetween(double low, double high) {
+		return cardRepo.findBySaleValueBetween(low, high);
+	}
+
+	@Override
+	public List<Card> findByTradeValueBetween(double low, double high) {
+		return cardRepo.findByTradeValueBetween(low, high);
+		
+	}
+
+	@Override
+	public List<Card> findByCondition_IdOrderByPlayerName(int conditionId) {
+		return cardRepo.findByCondition_IdOrderByPlayerName(conditionId);
+	}
+
+	@Override
+	public long countByCondition_Id(int conditionId) {
+		return cardRepo.countByCondition_Id(conditionId);
+	}
+
 }
