@@ -25,12 +25,12 @@ public class CardController {
 	@Autowired
 	private CardService cardService;
 
-	@GetMapping("baseballcards")
+	@GetMapping("cards")
 	public List<Card> getCardList() {
 		return cardService.listAllCards();
 	}
 
-	@GetMapping("baseballcards/{cardId}")
+	@GetMapping("cards/{cardId}")
 	public Card getCard(@PathVariable int cardId, HttpServletResponse response) {
 		Card card = cardService.getCard(cardId);
 		if (card == null) {
@@ -39,7 +39,7 @@ public class CardController {
 		return card;
 	}
 
-	@PostMapping("baseballcards")
+	@PostMapping("cards")
 	public Card createCard(@RequestBody Card card, HttpServletResponse response, HttpServletRequest request) {
 		Card created = null;
 		try {
@@ -55,7 +55,7 @@ public class CardController {
 		return created;
 	}
 
-	@PutMapping("baseballcards/{cardId}")
+	@PutMapping("cards/{cardId}")
 	public Card updateCard(@RequestBody Card card, @PathVariable int cardId, HttpServletResponse response) {
 		Card updated = null;
 		try {
@@ -72,7 +72,7 @@ public class CardController {
 		return updated;
 	}
 
-	@DeleteMapping("baseballcards/{cardId}")
+	@DeleteMapping("cards/{cardId}")
 	public void deleteCard(@PathVariable int cardId, HttpServletResponse response) {
 		try {
 			if (cardService.deleteById(cardId)) {
@@ -86,76 +86,76 @@ public class CardController {
 		}
 	}
 
-	@GetMapping("baseballcards/search/playerName/{playerName}")
+	@GetMapping("cards/search/playerName/{playerName}")
 	public List<Card> findCardsByPlayerName(@PathVariable String playerName) {
 		return cardService.findByPlayerNameLikeIgnoreCase(playerName);
 	}
 
-	@GetMapping("baseballcards/search/nameCardCount/{playerName}")
+	@GetMapping("cards/search/nameCardCount/{playerName}")
 	public long cardCountByPlayerName(@PathVariable String playerName) {
 		return cardService.countByPlayerNameLikeIgnoreCase(playerName);
 	}
 
-	@GetMapping("baseballcards/search/teamName/{teamName}")
+	@GetMapping("cards/search/teamName/{teamName}")
 	public List<Card> findCardsByTeam(@PathVariable String teamName) {
 		return cardService.findByTeamIgnoreCase(teamName);
 	}
 
-	@GetMapping("baseballcards/search/teamCardCount/{teamName}")
+	@GetMapping("cards/search/teamCardCount/{teamName}")
 	public long cardCountByTeamName(@PathVariable String teamName) {
 		return cardService.countByTeamIgnoreCase(teamName);
 	}
 
-	@GetMapping("baseballcards/search/boxSetAndYear/{boxSet}/{year}")
+	@GetMapping("cards/search/boxSetAndYear/{boxSet}/{year}")
 	public List<Card> findCardsByBoxSetAndYear(@PathVariable String boxSet, @PathVariable int year) {
 		return cardService.findByBoxSetAndYear(boxSet, year);
 	}
 
-	@GetMapping("baseballcards/search/boxSetAndYearCardCount/{boxSet}/{year}")
+	@GetMapping("cards/search/boxSetAndYearCardCount/{boxSet}/{year}")
 	public long cardCountByBoxSetAndYear(@PathVariable String boxSet, @PathVariable int year) {
 		return cardService.countByBoxSetAndYear(boxSet, year);
 	}
-	@GetMapping("baseballcards/search/autographed")
+	@GetMapping("cards/search/autographed")
 	public List<Card> findCardsByAutographed(){
 		return cardService.findByAutographedTrue();
 	}
-	@GetMapping("baseballcards/search/autographedCount")
+	@GetMapping("cards/search/autographedCount")
 	public long cardCountByAutographed(){
 		return cardService.countByAutographedTrue();
 	}
-	@GetMapping("baseballcards/search/nonAutographed")
+	@GetMapping("cards/search/nonAutographed")
 	public List<Card> findCardsByNonAutographed(){
 		return cardService.findByAutographedFalse();
 	}
-	@GetMapping("baseballcards/search/nonAutographedCount")
+	@GetMapping("cards/search/nonAutographedCount")
 	public long cardCountByNonAutographed(){
 		return cardService.countByAutographedFalse();
 	}
-	@GetMapping("baseballcards/search/isRookieCard")
+	@GetMapping("cards/search/isRookieCard")
 	public List<Card> findCardsByRookie(){
 		return cardService.findByRookieTrue();
 	}
-	@GetMapping("baseballcards/search/RookieCardCount")
+	@GetMapping("cards/search/RookieCardCount")
 	public long cardCountByRookie(){
 		return cardService.countByRookieTrue();
 	}
-	@GetMapping("baseballcards/search/isNotRookieCard")
+	@GetMapping("cards/search/isNotRookieCard")
 	public List<Card> findCardsByNonRookie(){
 		return cardService.findByRookieFalse();
 	}
-	@GetMapping("baseballcards/search/isNotRookieCardCount")
+	@GetMapping("cards/search/isNotRookieCardCount")
 	public long cardCountByNonRookie() {
 		return cardService.countByRookieFalse();
 	}
-	@GetMapping("baseballcards/search/manufacturer/{manufacturer}")
+	@GetMapping("cards/search/manufacturer/{manufacturer}")
 	public List<Card> findCardsByManufacturer(@PathVariable String manufacturer){
 		return cardService.findByManufacturerIgnoreCase(manufacturer);
 	}
-	@GetMapping("baseballcards/search/manufacturerCount/{manufacturer}")
+	@GetMapping("cards/search/manufacturerCount/{manufacturer}")
 	public long cardCountByManufacturer(@PathVariable String manufacturer) {
 		return cardService.countByManufacturerIgnoreCase(manufacturer);
 	}
-	@GetMapping("grades/search/cardGrade/{gradeId}/baseballcards")
+	@GetMapping("grades/search/cardGrade/{gradeId}/cards")
 	public List<Card> findCardsByGrade(@PathVariable Integer gradeId, HttpServletResponse response){
 		List <Card> gradedCards = cardService.findByGrade_IdOrderByPlayerName(gradeId);
 		if (gradeId > 10 || gradeId < 1) {
@@ -163,34 +163,34 @@ public class CardController {
 		}
 		return gradedCards;
 	}
-	@GetMapping("grades/search/cardGradeCount/{gradeId}/baseballcards")
+	@GetMapping("grades/search/cardGradeCount/{gradeId}/cards")
 	public long cardCountByGrade(@PathVariable Integer gradeId, HttpServletResponse response) {
 		if (gradeId > 10 || gradeId < 1) {
 			response.setStatus(404);
 		}
 		return cardService.countByGrade_Id(gradeId);
 	}
-	@GetMapping("grades/search/cardGradeNull/baseballcards")
+	@GetMapping("grades/search/cardGradeNull/cards")
 	public List<Card> findCardsByNullGrade() {
 		return cardService.findByGradeIsNullOrderByPlayerName();
 	}
-	@GetMapping("grades/search/cardGradeCountNull/baseballcards")
+	@GetMapping("grades/search/cardGradeCountNull/cards")
 	public long cardCountByNullGrade() {
 		return cardService.countByGradeIsNull();
 	}
-	@GetMapping("baseballcards/search/saleValueRange/{low}/{high}")
+	@GetMapping("cards/search/saleValueRange/{low}/{high}")
 	public List<Card> findCardsBetweenSaleValues(@PathVariable double low, @PathVariable double high){
 		return cardService.findBySaleValueBetween(low, high);
 	}
-	@GetMapping("baseballcards/search/tradeValueRange/{low}/{high}")
+	@GetMapping("cards/search/tradeValueRange/{low}/{high}")
 	public List<Card> findCardsBetweenTradeValues(@PathVariable double low, @PathVariable double high){
 		return cardService.findByTradeValueBetween(low, high);
 	}
-	@GetMapping("conditions/search/cardCondition/{conditionId}/baseballcards")
+	@GetMapping("conditions/search/cardCondition/{conditionId}/cards")
 	public List<Card> findCardsByCondition(@PathVariable int conditionId){
 		return cardService.findByCondition_IdOrderByPlayerName(conditionId);
 	}
-	@GetMapping("conditions/search/cardConditionCount/{conditionId}/baseballcards")
+	@GetMapping("conditions/search/cardConditionCount/{conditionId}/cards")
 	public long cardCountByCondition(@PathVariable int conditionId) {
 		return cardService.countByCondition_Id(conditionId);
 	}
