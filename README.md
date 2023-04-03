@@ -2,6 +2,14 @@
 URL for access
 http://3.233.223.34:8080/CardCollect/
 
+| HTTP Verb | URI                  | Request Body | Response Body |
+|-----------|----------------------|--------------|---------------|
+| GET       | `/api/cards`      |              | Collection of representations of all _cards_ resources |collection** endpoint |
+| GET       | `/api/cards/1`   |              | Representation of _card_ `1` |
+| POST      | `/api/cards`      | Representation of a new _card_ resource | Description of the result of the operation | **
+| PUT       | `/api/cards/1`   | Representation of a new version of _card_ `1` |
+| DELETE    | `/api/cards/1`   |              | |
+
 ## Description
 
 Card collect is an application that allows for the tracking of a collection of sports cards. Although it is currently only being used to track my baseball card collection, the main database tables, entities, repositories, services, and controllers are general enough that this application could later be used to track any sports card collection with small adjustments to the package names. This application currently utilizes REST, Spring Data JPA, and MySQL workbench to form the connection from the MySQL database through Spring Tool Suite Java-coded entities which are then deployed into the AWS cloud with an EC2 instance. 
