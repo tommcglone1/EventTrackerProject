@@ -4,7 +4,7 @@ http://3.233.223.34:8080/CardCollect/
 
 ## Description
 
-Card collect is an application that allows for the tracking of a collection of sports cards. Although it is currently only being used to track my baseball card collection, the main database tables, entities, repositories, services, and controllers are general enough that this application could later be used to track any sports card collection with small adjustments to the URI mapping in the CardController. This application currently utilizes REST, Spring Data JPA, and MySQL workbench to form the connection from the MySQL database through Spring Tool Suite Java-coded entities which are then deployed into the AWS cloud with an EC2 instance. 
+Card collect is an application that allows for the tracking of a collection of sports cards. Although it is currently only being used to track my baseball card collection, the main database tables, entities, repositories, services, and controllers are general enough that this application could later be used to track any sports card collection with small adjustments to the package names. This application currently utilizes REST, Spring Data JPA, and MySQL workbench to form the connection from the MySQL database through Spring Tool Suite Java-coded entities which are then deployed into the AWS cloud with an EC2 instance. 
 
 ## Database Schema
 
@@ -51,15 +51,13 @@ The condition and grade Service and ServiceImpl consist of only one findAll meth
 
  ##### Card Contoller
 
- The card controller connects the main logic for the application, the CRUD done to all sports cards, and all the query methods that will be used later with the front end. Earlier I mentioned that a minor fix could be done to make this application more intuitive for all sports card collections and it has to do with the URIs in this controller. The main CRUD methods are mapped to "baseballcards" along with {cardId} expression language in the delete, update, and getCard methods. This could later be changed to simply say cards instead of baseballcards. 
-
- In the getCard, update, and delete methods, a path variable is used to link information coming from the client side to the server side with the services. This path variable is crucial to ensuring that the correct data in the database is acted upon because it provides the path to access that specific data in the API from the client side of the application.
+ The card controller connects the client and server side logic for the application. The CRUD done to all sports cards and all the query methods that will be used later with the front end is stored here. The main CRUD methods are mapped to "cards" along with {cardId} expression language in the delete, update, and getCard methods. This path variable is crucial to ensuring that the correct data in the database is acted upon because it provides the path to access that specific data in the API from the client side of the application.
 
  The create and update methods include a request body annotation. This functions similarly to the command object used by the Controllers in previous projects. The annotation maps the HttpRequest body (the information from the client side) to the entity associated with the annotation. Once the data is mapped to the object a new instance of the object is created and stored in the database. This happens the same way for both the create Post mapping and update put mapping. The only difference is that the create method uses a generated Id to create an entirely new entity in the database, while the update method simply replaces the old entity entirely. 
 
- The query methods all occur similarly and can be broken down into two categories lists and counts. The lists return all the card instances that have the field that is specified. For example, findCardsByPlayerName returns a list of cards found by using the player's name in the database. This is mapped by "baseballcards/search/playerName/{playerName}". This URI pattern is the same for each method where a list of cards is retrieved from the database. 
+ The query methods all occur similarly and can be broken down into two categories lists and counts. The lists return all the card instances that have the field that is specified. For example, findCardsByPlayerName returns a list of cards found by using the player's name in the database. This is mapped by "cards/search/playerName/{playerName}". This URI pattern is the same for each method where a list of cards is retrieved from the database. 
 
- The count queries return a long that displays how many of each card in the database is associated with the requested field. For example, cardCountByPlayerName returns the number of cards that are associated with that player's name in the database. The mapping for this method is "baseballcards/search/nameCardCount/{playerName}". This pattern is also the same for each count method in the rest of the controller. 
+ The count queries return a long that displays how many of each card in the database is associated with the requested field. For example, cardCountByPlayerName returns the number of cards that are associated with that player's name in the database. The mapping for this method is "cards/search/nameCardCount/{playerName}". This pattern is also the same for each count method in the rest of the controller. 
 
  ## Technologies Used
 * Java
