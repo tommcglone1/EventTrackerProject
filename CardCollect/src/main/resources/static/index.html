@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Card Collect</title>
+<script type="text/javascript" src='js/script.js'></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>Welcome to Card Collect</h1>
+
+<div id="cardTable">
+<table>
+	<thead>
+		<th>Card Number</th>
+		<th>Player Name</th>
+		<th>Team</th>
+		<th>Set</th>
+		<th>Type/Variation</th>
+		<th>Year</th>
+		<th>manufacturer</th>
+		<th>Sale Value</th>
+		<th>Trade Value</th>
+		<th>SP Number</th>
+		<th>Parallel</th>
+		<th>Condition</th>
+		<th>Grade</th>
+		<th>Rookie Card</th>
+		<th>AutoGraphed?</th>
+	</thead>
+	<tbody id="cardTableTbody">
+		
+	</tbody>	
+</table>
+</div>
+<div id="newCardFormDiv">
+<form name="newCardForm">
+	<label for="number">Card Number: </label>
+	<input type="text" name="number"><br>
+	<label for="playerName">Player Name: </label>
+	<input type="text" name="playerName"><br>
+	<label for="team">Team: </label>
+	<input type="text" name="team"><br>
+	<label for="boxSet">Card Set: </label>
+	<input type="text" name="boxSet"><br>
+	<label for="type">Card type/variation: </label>
+	<input type="text" name="type"><br>
+	<label for="year">Card Year: </label>
+	<input type="number" name="year"><br>
+	<label for="manufacturer">Manufacturer: </label>
+	<input type="text" name="manufacturer"><br>
+	<label for="spNumber">SP Number: </label>
+	<input type="text" name="spNumber"><br>
+	<label for="parallel">Parallel Name: </label>
+	<input type="text" name="parallel"><br>
+	<label for="saleValue">Sale Value: </label>
+	<input type="number" name="saleValue"><br>
+	<label for="tradeValue">Trade Value: </label>
+	<input type="number" name="tradeValue"><br>
+	<label for="imgURL">URL image of card: </label>
+	<input type="text" name="imgURL"><br>
+	<label>Is this a rookie card?</label><br>
+	<label for="rookie">Yes </label>
+	<input type="radio" name="rookie" value="true">
+	<label for="rookie">No </label>
+	<input type="radio" name="rookie" value="false"><br>
+	<label>Is this card autographed?</label><br>
+	<label for="autographed">Yes </label>
+	<input type="radio" name="autographed" value="true">
+	<label for="autographed">No </label>
+	<input type="radio" name="autographed" value="false"><br>
+	<label for="condition">What is this cards condition?</label>
+	<select name="condition">
+		<option value="1">Near Mint or Better</option>
+		<option value="2">Excellent</option>
+		<option value="3">Very Good</option>
+		<option value="4">Good</option>
+		<option value="5">Poor</option>
+	</select><br>
+	<label for="grade">If this card is graded, select its numbered grade: </label>
+	<select name="grade">
+		<option value="10">10</option>
+		<option value="9">9</option>
+		<option value="8">8</option>
+		<option value="7">7</option>
+		<option value="6">6</option>
+		<option value="5">5</option>
+		<option value="4">4</option>
+		<option value="3">3</option>
+		<option value="2">2</option>
+		<option value="1">1</option>
+	</select><br>
+	<input type="button" name="createButton" value="Add to Collection">
+
+</form>	
+</div>
+</body>
+</html>
