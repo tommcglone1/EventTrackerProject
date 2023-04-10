@@ -59,22 +59,40 @@ function displayCards(cardList){
 		td.textContent = card.tradeValue;
 		tr.appendChild(td);
 		td = document.createElement('td');
+		if(card.spNumber){
 		td.textContent = card.spNumber;
+		}else{
+			td.textContent = 'N/A'
+		}
 		tr.appendChild(td);
 		td = document.createElement('td');
 		td.textContent = card.parallel;
 		tr.appendChild(td);
 		td = document.createElement('td');
-		td.textContent = card.condition;
+		td.textContent = card.condition.name;
 		tr.appendChild(td);
 		td = document.createElement('td');
-		td.textContent = card.grade;
+		if(card.grade){
+		td.textContent = card.grade.name;
+		}else{
+		td.textContent = 'N/A'
+		}
 		tr.appendChild(td);
 		td = document.createElement('td');
-		td.textContent = card.rookie;
+		if(card.rookie){
+			td.textContent = 'YES'
+		}
+		else{
+			td.textContent = 'NO'
+		}
 		tr.appendChild(td);
 		td = document.createElement('td');
-		td.textContent = card.autographed;
+		if(card.autographed){
+			td.textContent = 'YES'
+		}
+		else{
+			td.textContent = 'NO'
+		}
 		tr.appendChild(td);
 		td = document.createElement('td');
 		if(card.imgURL){
