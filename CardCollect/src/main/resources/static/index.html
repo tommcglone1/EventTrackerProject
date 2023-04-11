@@ -13,27 +13,21 @@
 <div id="cardTable">
 <table>
 	<thead>
+	<tr>
 		<th>Card Number</th>
 		<th>Player Name</th>
 		<th>Team</th>
 		<th>Set</th>
-		<th>Type/Variation</th>
-		<th>Year</th>
-		<th>manufacturer</th>
-		<th>Sale Value</th>
-		<th>Trade Value</th>
-		<th>SP Number</th>
-		<th>Parallel</th>
-		<th>Condition</th>
-		<th>Grade</th>
-		<th>Rookie Card</th>
-		<th>AutoGraphed?</th>
+	
+		</tr>
 	</thead>
 	<tbody id="cardTableTbody">
 		
 	</tbody>	
 </table>
 </div>
+<div id="displaySingleCard"></div>
+
 <div id="newCardFormDiv">
 <form name="newCardForm">
 	<label for="number">Card Number: </label>
@@ -80,7 +74,7 @@
 	</select><br>
 	<label for="grade">If this card is graded, select its numbered grade: </label>
 	<select name="grade">
-		<option value="null">Not Graded</option>
+		<option></option>
 		<option value="10">10</option>
 		<option value="9">9</option>
 		<option value="8">8</option>
@@ -95,6 +89,8 @@
 	<input type="button" name="createButton" value="Add to Collection">
 
 </form>	
+</div>
+<div id="updateCardDiv">
 </div>
 </body>
 </html>
