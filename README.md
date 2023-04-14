@@ -67,20 +67,67 @@ The condition and grade Service and ServiceImpl consist of only one findAll meth
 
  The count queries return a long that displays how many of each card in the database is associated with the requested field. For example, cardCountByPlayerName returns the number of cards that are associated with that player's name in the database. The mapping for this method is "cards/search/nameCardCount/{playerName}". This pattern is also the same for each count method in the rest of the controller. 
 
+
+ ## JavaScript and HTML
+
+#### Creating a Card
+
+ HTML and JavaScript(JS) were used in conjunction to build the index page of this project. The HTML file is somewhat plain in the sense that it only contains two forms and a table. The first form shown on the webpage is used to create a new card to be added to the collection and the database. It contains all the input fields necessary to create a card and is directly linked to the JS side of the project via an event listener attached to the button on the form. This connection is established by using the name attribute associated with the create form (newCardForm) and through that accessing it’s create button input via its name (createButton). When the button is clicked the createCard callback function within the JS file is enacted, and the process of persisting the card to the database begins. 
+
+ The first operation that occurs in the createCard function is preventing default. This prevents the webpage from reloading each time the button is pressed which would cause the information from the form to be lost before it could reach the JS file. Next, a form variable is created by using the event object passed to all methods that represent an event call back, the target of the event which is the button that was clicked, and the JS parentElement which in this case is thee create a card form. This means that the form itself is stored in the variable. Then, an object is created using the values of the form. This is done by accessing each input value of the form using the sequence of form.nameOfInput.value. For example, the playerName field of the card object is set using form.playerName.value, playerName being the name attribute attached to the input tag in the HTML file. It is important to note that grade is not included in the original creation of the object and is placed within an if statement. This is because if a grade is not included for a card in the HTML form the grade will pass into the object as null. This is perfectly fine, but if the card object attempts to read the grades id as null, as is done with condition, an error will occur. This if statement allows for a grade object's id to be attached to the object if one is provided in the form, or for the entire grade object to be sset to null. 
+ 
+ #### XMLHttpRequest 
+
+ The card is then sent to the sendCardRequest function for the XMLHttpRequest which will then send the card properties to the controller so they can be persisted into the database through the service and repository methods. I first create a variable to store the new XMLHttpRequest, followed by calling the open method to initialize the request. Within this method call, the HTTP request method verb POST is included to signify what type of request is being created, and the mapping is provided so the data can be sent to  the correct request mapping in the controller. Then, the setRequestHeader method is called which is used to specify the type of request body being sent. Without this, the text returned will not be JSON and will not be useable by JS. Following this, JSON.stringify is called to convert the JS object into a JSON string, and that string is passed into the send method which sends the XMLHttpRequest to the server. The readyState remains at one at this time, but the function now moves into the onreadystatechange function block awaiting the readyState to reach 4.
+
+Xhr.onreadystatechange is used for three of the changes that occur to the readyState (2-4). The readyState property has 5 possible values zero through five,
+
+* 0 - when the client has been created and open has not been called
+* 1 - open has been called
+* 2 - send method has been called and the request header and the status code are available 
+* 3 - The information is being downloaded but only contains part of the data
+* 4 - All data has been downloaded and is ready to be used by the browser
+
+If parsing occurs before reaching readyState 4, all of the information for the reponseText will not be present and the application will fail. Once ready state 4 is reached and the server returns the status code as either 200 or 201 the parsing process can begin. This process begins with the capturing of response from the server. The responseText holds the server’s response as text, this can either be parsed into JSON or used to show an error in text format. Assuming that information is returned, it is returned as a Document Object Model string and must be transformed to JSON through the global JSON objects parse method. Once the parsing is complete the newly formed object can be used as a JS object. This process is similar for all CRUD methods with slight variations depending on what type of CRUD must be achieved. Because of this, this section will be referred to throughout the rest of the JS portion of this README.
+
+## Dynamic Table
+
+Below the create a card form on the HTML index page is the table of all the cards currently in the database. Later versions of the project hope to include user authentication so that many users can have many cards, but at the current moment, this is not the case. Regardless, a dynamic JS table is used to display the cards in the database. This  begins with the loadAllCards method which pulls all the cards from the database in a list. This list is sent to the display cards method where the list is iterated over dynamically creating table rows based on how many cards are in the database. Each row is also provided with an event listener which makes them clickable. This is done so a detail div can be displayed underneath the list for each specific card. The rest of the table columns are created by appending td tags to the current row with the textContent of the td being assigned the playerName, team, and boxSet card properties. 
+
+#### Single Card
+
+A single card is displayed in a similar method to loadAllCards using an XMLHttpRequest with the modifier of the cardId being included in the mapping so that the card associated with that id will be shown in the detail div. All the information in the detail div is displayed through JS by dynamically creating an unordered list. Most notably the update and delete buttons. 
+
+When the delete button is clicked, the deleteCard function is called and the current card id is passed as an argument. The deleteCard function works in almost the same way as the getSingleCard function. The id of the spotlighted card is passed in and is used in the mapping however, this time the card is only removed from the database, and since the deleteCard controller method has a void return type, no parsing of responseText is required. 
+
+The updateButton creates a click event that allows the updateCard method to be called with a card passed in as an argument. When this button is clicked, the update form is displayed by switching the updateCardDiv HTML element's visibility to visible. (Note: The page loads with the updateCardDiv in a hidden state.) The passed-in card parameter is used to set the values of every input tag on the HTML form within the JavaScript. This form itself has a button that also has a click event which starts the process of persistence in the database. When the update form's button is clicked, an updateCard object is created using the inputs from the form similar to the create method. The main difference between the two being that the grade property must now be deliberately checked for a value or a null based on the input received from the form. After the object is created, the sendUpdateRequest method is called and the updated card information and the card's id are sent in as arguments. The update process occurs the same as the create process aside from using the card id in as a path variable in the mapping and the back-end rest logic.
+
+
+
  ## Technologies Used
 * Java
 * Spring Tool Suite
 * Spring Data JPA
 * REST
 * Spring Boot
+* HTML
+* CSS
+* Javascript
 
 ## Lessons Learned
 
+###### REST
+
 * One of the main lessons I learned from this is the overall flow of the REST API. It was helpful to see how the data moves from the controller to the services, how the queries and predetermined methods occur in the repository, then to the database, and to the client directly as JSON. 
 
-* I also got a lot of hands-on with Postman during this application. It is quite a useful tool when testing mappings and how the Http bodies from the client side will interact with the server-side services and controller. 
+* Getting a lot of hands-on with Postman during this application was also very beneficial for me. It is quite a useful tool when testing mappings and how the Http bodies from the client side will interact with the server-side services and controller. 
 
-* I also learned a hard lesson about using SQL keywords in my database tables. This mistake  causes an SQL syntax error that cannot be uncovered unless you think to look for a problem with the word itself and not the query coming from hibernate. 
+* I also learned a difficult lesson about using SQL keywords in my database tables. This mistake  causes an SQL syntax error that cannot be uncovered unless you think to look for a problem with the word itself and not the query coming from hibernate. 
 
+###### JavaScript
 
+* The relationship between HTML and JavaScript is something that came into focus for me during this project. Specifically, how it is possible to acquire and use any part of the HTML form on the JS side of the project. 
 
+* As a side effect of the JavaScript XMLHttpRequest process, I learned about how to handle nullable foreign keys in a database. These objects must be handled differently than just a simple property of the JS object or even an object that is Not-Nullable. It is important to use correct logic in JS to ensure the correct data is added to the database. 
+
+* Finally, I learned another difficult lesson about a balance between using HTML and JS. In an earlier (not working) version of this project I was creating my update form entirely dynamically, which was a great exercise but was also very tedious and time-consuming. It would have been much more efficient to begin that process the way I ended it with a base HTML table and attaching the values using JS.
