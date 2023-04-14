@@ -51,6 +51,7 @@ public class CardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(400);
+			created = null;
 		}
 		return created;
 	}
@@ -67,7 +68,7 @@ public class CardController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			response.setStatus(400);
-			updated = null;
+			
 		}
 		return updated;
 	}

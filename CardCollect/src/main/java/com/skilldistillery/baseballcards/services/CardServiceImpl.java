@@ -32,12 +32,14 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public Card create(Card card) {
+		
 		return cardRepo.saveAndFlush(card);
 	}
 
 	@Override
 	public Card update(int cardId, Card card) {
 		Card original = cardRepo.findById(cardId);
+		
 		if (original != null) {
 			original.setPlayerName(card.getPlayerName());
 			original.setNumber(card.getNumber());
@@ -47,7 +49,6 @@ public class CardServiceImpl implements CardService {
 			original.setImgURL(card.getImgURL());
 			original.setYear(card.getYear());
 			original.setAutographed(card.getAutographed());
-			original.setRookie(card.getRookie());
 			original.setManufacturer(card.getManufacturer());
 			original.setSaleValue(card.getSaleValue());
 			original.setTradeValue(card.getTradeValue());
@@ -55,11 +56,11 @@ public class CardServiceImpl implements CardService {
 			original.setSpNumber(card.getSpNumber());
 			original.setParallel(card.getParallel());
 			original.setCondition(card.getCondition());
-			if (card.getGrade() != null) {
+			
 				original.setGrade(card.getGrade());
-			}
+			
 		}
-		return cardRepo.saveAndFlush(card);
+		return cardRepo.saveAndFlush(original);
 	}
 
 	@Override

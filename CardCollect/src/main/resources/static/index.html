@@ -10,24 +10,8 @@
 
 <h1>Welcome to Card Collect</h1>
 
-<div id="cardTable">
-<table>
-	<thead>
-	<tr>
-		<th>Card Number</th>
-		<th>Player Name</th>
-		<th>Team</th>
-		<th>Set</th>
-	
-		</tr>
-	</thead>
-	<tbody id="cardTableTbody">
-		
-	</tbody>	
-</table>
-</div>
-<div id="displaySingleCard"></div>
 
+<h1>Create A Card</h1>
 <div id="newCardFormDiv">
 <form name="newCardForm">
 	<label for="number">Card Number: </label>
@@ -74,7 +58,7 @@
 	</select><br>
 	<label for="grade">If this card is graded, select its numbered grade: </label>
 	<select name="grade">
-		<option></option>
+		<option value="">Ungraded</option>
 		<option value="10">10</option>
 		<option value="9">9</option>
 		<option value="8">8</option>
@@ -90,7 +74,92 @@
 
 </form>	
 </div>
-<div id="updateCardDiv">
+<hr>
+<div id="cardTable">
+<table>
+	<thead>
+	<tr>
+		<th>Card Number</th>
+		<th>Player Name</th>
+		<th>Team</th>
+		<th>Set</th>
+	
+		</tr>
+	</thead>
+	<tbody id="cardTableTbody">
+		
+	</tbody>	
+</table>
 </div>
+<div id="displaySingleCard">
+
+</div>
+<div id="updateCardDiv">
+<h1>Update Card</h1>
+<div id="updateCardFormDiv">
+<form name="updateCardForm">
+	<label for="number">Card Number: </label>
+	<input type="text" name="number" id="number"><br>
+	<label for="playerName">Player Name: </label>
+	<input type="text" name="playerName" id="playerName"><br>
+	<label for="team">Team: </label>
+	<input type="text" name="team" id="team"><br>
+	<label for="boxSet">Card Set: </label>
+	<input type="text" name="boxSet" id="boxSet"><br>
+	<label for="type">Card type/variation: </label>
+	<input type="text" name="type" id="type"><br>
+	<label for="year">Card Year: </label>
+	<input type="number" name="year" id="year"><br>
+	<label for="manufacturer">Manufacturer: </label>
+	<input type="text" name="manufacturer" id="manufacturer"><br>
+	<label for="spNumber">SP Number: </label>
+	<input type="text" name="spNumber" id="spNumber"><br>
+	<label for="parallel">Parallel Name: </label>
+	<input type="text" name="parallel" id="parallel"><br>
+	<label for="saleValue">Sale Value: </label>
+	<input type="number" name="saleValue" id="saleValue"><br>
+	<label for="tradeValue">Trade Value: </label>
+	<input type="number" name="tradeValue" id="tradeValue"><br>
+	<label for="imgURL">URL image of card: </label>
+	<input type="text" name="imgURL" id="imgURL"><br>
+	<label>Is this card autographed?</label><br>
+	<label for="autographed">Yes </label>
+	<input type="radio" name="autographed" value="true" id="auto">
+	<label for="autographed">No </label>
+	<input type="radio" name="autographed" value="false" id="notAuto"><br>
+	<label for="condition">What is this cards condition?</label>
+	<select name="condition" id="condition">
+		
+		<option value="1">Near Mint or Better</option>
+		<option value="2">Excellent</option>
+		<option value="3">Very Good</option>
+		<option value="4">Good</option>
+		<option value="5">Poor</option>
+	</select><br>
+	
+	<label for="grade">If this card is graded, select its numbered grade: </label>
+	<select name="grade" id="grade">
+		<option value="">Ungraded</option>
+		<option value="10">10</option>
+		<option value="9">9</option>
+		<option value="8">8</option>
+		<option value="7">7</option>
+		<option value="6">6</option>
+		<option value="5">5</option>
+		<option value="4">4</option>
+		<option value="3">3</option>
+		<option value="2">2</option>
+		<option value="1">1</option>
+	</select><br>
+	
+
+	<input type="button" name="updateButton" value="Update Card">
+
+</form>	
+</div>
+</div>
+
+
+
 </body>
 </html>
