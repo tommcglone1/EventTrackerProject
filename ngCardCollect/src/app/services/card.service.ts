@@ -40,7 +40,7 @@ private url = this.baseUrl + 'api/cards'
 
   create(card: Card): Observable<Card>{
     card.active = true;
-    console.log(card);
+
 
     return this.http.post<Card>(this.url, card).pipe(
       catchError((err: any) => {
@@ -70,7 +70,7 @@ private url = this.baseUrl + 'api/cards'
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('Card.Delete(): error deleteing card: ' + err)
+          () => new Error(`Card.Delete(): error deleteing card: ${err}`)
         );
       })
     );

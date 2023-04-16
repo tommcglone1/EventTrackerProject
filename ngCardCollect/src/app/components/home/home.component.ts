@@ -1,8 +1,10 @@
 import { Card } from 'src/app/models/card';
 import { CardService } from './../../services/card.service';
 import { Component } from '@angular/core';
-import { CardGrade } from 'src/app/models/card-grade';
-import { CardCondition } from 'src/app/models/card-condition';
+
+import { RookieCardPipe } from 'src/app/pipes/rookie-card.pipe';
+import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
+
 
 @Component({
   selector: 'app-home',
@@ -18,40 +20,67 @@ export class HomeComponent {
   editCard: Card | null = null;
   gradeNames: string[] = [];
   creating: boolean = false;
-  //cardGrade: CardGrade = new CardGrade();
-  //cardCondition: CardCondition = new CardCondition();
+  showStats: boolean = false;
 
 
-  constructor(private cardService: CardService) {}
+
+  constructor(private cardService: CardService,
+    private rookieCardPipe: RookieCardPipe,
+    private autoCardPipe: AutoCardPipe
+    ) {}
 
   ngOnInit(): void {
     this.reload();
   }
 
+  cardCount(): number{
+     return this.cards.length;
+  }
+
+  displayRookieCards():Card[]{
+    return this.rookieCardPipe.transform(this.cards);
+  }
+
+  displayRookieCardsCount(): number{
+    return this.rookieCardPipe.transform(this.cards).length;
+  }
+
+  displayAutoCards():Card[]{
+    return this.autoCardPipe.transform(this.cards);
+  }
+
+  displayAutoCardsCount(): number{
+    return this.autoCardPipe.transform(this.cards).length;
+  }
+
+
   cardCreate(){
     this.gradeNumber = null;
+    this.showStats = false;
     this.selected = null;
     this.editCard = null;
     this.creating = true;
   }
 
   displaySingleCard(card: Card) {
+    this.showStats = false;
     this.selected = card;
   }
 
   setEditCard(){
-    console.log(this.selected)
+    this.showStats = false;
 
     this.editCard = Object.assign({}, this.selected);
     this.gradeNumber  = this.editCard?.grade?.id !== undefined ? this.editCard?.grade?.id: null;
   }
 
   displayTable() {
+    this.showStats = false;
     this.selected = null;
   }
 
   reload() {
-
+    this.showStats =false;
     this.cardService.index().subscribe({
       next: (data) => {
         this.cards = data;
@@ -59,9 +88,7 @@ export class HomeComponent {
           if(card.imgURL === ""){
             card.imgURL = 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
           }
-          if ( card.grade !==null &&  !this.gradeNames.includes(card.grade!.name)) {
-            this.gradeNames.push(card.grade!.name);
-          }
+
         });
         console.log(this.gradeNames);
       },
@@ -86,8 +113,8 @@ export class HomeComponent {
       next: (createdCard) => {
         console.log(createdCard);
         this.newCard = new Card();
-        // this.selected = createdCard;
-        // this.selected.condition.name =
+        this.ngOnInit();
+
         console.log(createdCard);
         this.reload();
         this.creating = false;
@@ -106,10 +133,12 @@ export class HomeComponent {
       card.grade = { id: this.gradeNumber,
       name: '' };
     }
+
     this.cardService.update(card).subscribe({
       next: (updatedCard) => {
+        console.log(updatedCard)
         this.editCard = null;
-        this.selected = updatedCard;
+        this.selected =null;
         this.reload();
       },
       error: (fail) => {
