@@ -237,7 +237,7 @@
 
 <div id="collectionStats" *ngIf="showStats">
   <h1>Total Cards: {{cardCount()}}</h1>
-  <table *ngIf="displayRookieCardsCount() > 0">
+  <table class="table table-bordered" *ngIf="displayRookieCardsCount() > 0">
     <thead>
       <tr>
         <h4>Total Rookie Cards: {{displayRookieCardsCount()}}</h4>
@@ -263,7 +263,7 @@
   </table>
 
 
-  <table *ngIf="displayAutoCardsCount() > 0">
+  <table class="table table-bordered"  *ngIf="displayAutoCardsCount() > 0">
     <thead>
       <tr>
         <h4>Total Autographed Cards: {{displayAutoCardsCount()}}</h4>

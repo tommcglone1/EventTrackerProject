@@ -1,2 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+
+.cardImgTable {
+  width: 50px;
+  height:auto;
+}
+
+.cardImgDetailDiv {
+  width: 200px;
+  height:auto;
+}
+
+button {
+
+  cursor:pointer;
+}
+
+#tableClick{
+  cursor:pointer;
+}
+
+body{
+  background: rgb(77,207,96);
+  background: linear-gradient(90deg, rgba(77,207,96,1) 30%, rgba(1,164,58,1) 76%);
+}
+
+
