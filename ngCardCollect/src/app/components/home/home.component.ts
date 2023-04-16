@@ -29,6 +29,9 @@ export class HomeComponent {
   }
 
   cardCreate(){
+    this.gradeNumber = null;
+    this.selected = null;
+    this.editCard = null;
     this.creating = true;
   }
 
@@ -38,12 +41,9 @@ export class HomeComponent {
 
   setEditCard(){
     console.log(this.selected)
-    if(this.selected!.grade){
-      let select = document.getElementById('grade')
-      // select!.value = this.selected!.grade.id;
-    }
 
     this.editCard = Object.assign({}, this.selected);
+    this.gradeNumber  = this.editCard?.grade?.id !== undefined ? this.editCard?.grade?.id: null;
   }
 
   displayTable() {
@@ -51,17 +51,24 @@ export class HomeComponent {
   }
 
   reload() {
+
     this.cardService.index().subscribe({
       next: (data) => {
         this.cards = data;
         data.forEach((card) => {
+          if(card.imgURL === ""){
+            card.imgURL = 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
+          }
           if ( card.grade !==null &&  !this.gradeNames.includes(card.grade!.name)) {
             this.gradeNames.push(card.grade!.name);
           }
         });
         console.log(this.gradeNames);
       },
-      error: (fail) => {},
+      error: (fail) => {
+        console.error('Error reloading');
+        console.error(fail);
+      },
     });
   }
 
@@ -79,13 +86,15 @@ export class HomeComponent {
       next: (createdCard) => {
         console.log(createdCard);
         this.newCard = new Card();
-        this.selected = createdCard;
+        // this.selected = createdCard;
+        // this.selected.condition.name =
+        console.log(createdCard);
         this.reload();
         this.creating = false;
       },
-      error: (ohno) => {
+      error: (fail) => {
         console.error('Error creating card');
-        console.error(ohno);
+        console.error(fail);
       },
     });
   }
@@ -103,9 +112,9 @@ export class HomeComponent {
         this.selected = updatedCard;
         this.reload();
       },
-      error: (ohno) => {
-        console.error('Error updating todo');
-        console.error(ohno);
+      error: (fail) => {
+        console.error('Error updating card');
+        console.error(fail);
       },
     });
   }
@@ -116,9 +125,9 @@ export class HomeComponent {
         this.reload();
         this.selected=null;
       },
-      error: (ohno) => {
-        console.error('Error createing todo');
-        console.error(ohno);
+      error: (fail) => {
+        console.error('Error deleting card');
+        console.error(fail);
       },
     });
   }

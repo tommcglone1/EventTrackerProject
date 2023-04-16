@@ -1,25 +1,27 @@
 <h1>Card Collect</h1>
 
-<button *ngIf="!creating" (click)="cardCreate()">Add a Card to Your Collection</button>
+<button class="btn btn-primary" *ngIf="!creating" (click)="cardCreate()">Add a Card to Your Collection</button>
 <div>
-  <table *ngIf="!selected && !editCard && !creating">
+  <table class="table table-striped table-hover" *ngIf="!selected && !editCard && !creating">
     <thead>
       <tr>
 
       <th>Card Number</th>
       <th>Player Name</th>
       <th>Box Set</th>
+      <th></th>
+
 
       <tr>
     </thead>
     <tbody>
       <tr    *ngFor="let card of cards" >
 
-        <td (click)="displaySingleCard(card)">{{card.number}}</td>
-        <td (click)="displaySingleCard(card)">{{card.playerName}}</td>
-        <td (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-        <td (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-        <td><button (click)="deleteCard(card.id)">Remove From Collection</button></td>
+        <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
+        <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
+        <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
+        <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
+        <td><button class="btn btn-danger" (click)="deleteCard(card.id)">Remove From Collection</button></td>
 
       </tr>
 
@@ -28,56 +30,56 @@
 
 <div id="cardDetailDiv" *ngIf="selected && !editCard && !creating">
 
-  <h1>{{selected.number}}</h1>
+  <h1>Card Number: {{selected.number}}</h1>
   <img class="cardImgDetailDiv"src={{selected.imgURL}}>
-  <table>
+  <table class="table-bordered">
     <tbody>
       <tr>
         <td>Player Name: </td>
         <td>{{selected.playerName}}</td>
       </tr>
 
-      <tr>
-        <td>Team </td>
+      <tr *ngIf="selected.team">
+        <td>Team: </td>
         <td>{{selected.team}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.boxSet">
         <td>Box Set </td>
         <td>{{selected.boxSet}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.type">
         <td>Type/Variation: </td>
         <td>{{selected.type}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.year">
         <td>Year:  </td>
         <td>{{selected.year}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.manufacturer">
         <td>Manufacturer: </td>
         <td>{{selected.manufacturer}}</td>
       </tr>
 
-      <tr>
-        <td>SP Number </td>
+      <tr *ngIf="selected.spNumber">
+        <td>SP Number: </td>
         <td>{{selected.spNumber}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.parallel">
         <td>Parallel: </td>
         <td>{{selected.parallel}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.saleValue">
         <td>Sale Value: </td>
         <td>{{selected.saleValue}}</td>
       </tr>
 
-      <tr>
+      <tr *ngIf="selected.tradeValue">
         <td>Trade Value: </td>
         <td>{{selected.tradeValue}}</td>
       </tr>
@@ -89,7 +91,7 @@
 
       <tr *ngIf="selected.autographed">
 
-        <td>AutoGraphed</td>
+        <td>AutoGraphed: </td>
         <td>&#10004;</td>
       </tr>
 
@@ -102,15 +104,11 @@
         <td>Grade</td>
         <td>{{selected.grade.id}} - {{selected.grade.name}}</td>
       </tr>
-      <tr>
-        <td><button (click)="setEditCard()">Update</button></td>
-        <td><button (click)="displayTable();">Home</button></td>
-
-      </tr>
-
 
     </tbody>
   </table>
+  <button class="btn btn-info" (click)="setEditCard()">Update</button>
+  <button class="btn btn-secondary" (click)="displayTable();">Home</button>
 </div>
 
 <div id="createForm" *ngIf="!selected && !editCard && creating">
@@ -166,7 +164,7 @@
 		<option value="2">2</option>
 		<option value="1">1</option>
 	</select><br>
-	<input (click)="addCard(newCard)" type="button" name="createButton" value="Add to Collection">
+	<button class="btn btn-success" (click)="addCard(newCard)">Add to Collection</button>
 
 </form>
 </div>
@@ -213,7 +211,7 @@
 
     <label for="grade">If this card is graded, select its numbered grade: </label>
     <select name="grade" id="grade"  [(ngModel)]="gradeNumber">
-      <option value="" >Ungraded</option>
+      <option value=null >Ungraded</option>
       <option value="10">10</option>
       <option value="9">9</option>
       <option value="8">8</option>
@@ -227,7 +225,7 @@
     </select><br>
 
 
-    <input (click)="updateCard(editCard)" type="button" name="updateButton" value="Update Card">
+    <button class="btn btn-success" (click)="updateCard(editCard)" >Update Card </button>
 
 
 
