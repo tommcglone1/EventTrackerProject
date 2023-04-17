@@ -90,7 +90,7 @@ export class HomeComponent {
           }
 
         });
-        console.log(this.gradeNames);
+
       },
       error: (fail) => {
         console.error('Error reloading');

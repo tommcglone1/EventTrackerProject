@@ -94,7 +94,7 @@ If parsing occurs before reaching readyState 4, all of the information for the r
 
 Below the create a card form on the HTML index page is the table of all the cards currently in the database. Later versions of the project hope to include user authentication so that many users can have many cards, but at the current moment, this is not the case. Regardless, a dynamic JS table is used to display the cards in the database. This  begins with the loadAllCards method which pulls all the cards from the database in a list. This list is sent to the display cards method where the list is iterated over dynamically creating table rows based on how many cards are in the database. Each row is also provided with an event listener which makes them clickable. This is done so a detail div can be displayed underneath the list for each specific card. The rest of the table columns are created by appending td tags to the current row with the textContent of the td being assigned the playerName, team, and boxSet card properties. 
 
-#### Single Card
+#### Single Card Display
 
 A single card is displayed in a similar method to loadAllCards using an XMLHttpRequest with the modifier of the cardId being included in the mapping so that the card associated with that id will be shown in the detail div. All the information in the detail div is displayed through JS by dynamically creating an unordered list. Most notably the update and delete buttons. 
 
@@ -102,6 +102,40 @@ When the delete button is clicked, the deleteCard function is called and the cur
 
 The updateButton creates a click event that allows the updateCard method to be called with a card passed in as an argument. When this button is clicked, the update form is displayed by switching the updateCardDiv HTML element's visibility to visible. (Note: The page loads with the updateCardDiv in a hidden state.) The passed-in card parameter is used to set the values of every input tag on the HTML form within the JavaScript. This form itself has a button that also has a click event which starts the process of persistence in the database. When the update form's button is clicked, an updateCard object is created using the inputs from the form similar to the create method. The main difference between the two being that the grade property must now be deliberately checked for a value or a null based on the input received from the form. After the object is created, the sendUpdateRequest method is called and the updated card information and the card's id are sent in as arguments. The update process occurs the same as the create process aside from using the card id in as a path variable in the mapping and the back-end rest logic.
 
+
+## Angular
+
+#### Reload and Index Methods
+
+The Angular version of the front end of this project was quite enjoyable to build even though it certainly presented many challenges. The core code of the project exists in the home.component.ts, card.service.ts, and the home.component.html. These three files work together to perform a couple of tasks. First, to pull data from the database to be presented to the user. This can be seen by the table that is presented when the website initially opens. To display this table, the ngOnInit method calls the reload method within the component.ts. In the reload method, a call is made to the index method of the service.ts and the reload method then subscribes to that index method and waits for its response. Inside the index method, an XMLHttp request is made using the variable HTTP which is of type HttpClient. This HttpClient variable performs the request without needing to write out an entire formal XMLHttp request. The URL 'http://localhost:8085/'api/cards' is used to communicate with the RESTController via the individual request mappings associated with the controller methods. These controller methods then communicate as described above in the RESTController portion of this README. Once the information has been retrieved it is sent back to the component.ts reload method where the data is assigned to an empty cards array, as well as a default picture is set in case there is not one provided for the card. From here, the cards array is displayed on the HTML page when it is called within the first table body of the HTML page. It is then iterated over and the card objects within the array are displayed in a table with only a few elements of the full card being shown. 
+
+#### Single Card Display
+
+Each td of this table holds a click event that allows for the associated card to be displayed on its own with all of its included properties shown in a table. The reason that I had to make each td clickable instead of just the row itself is because of the way I have the page switching on itself through variables and objects. Before when I did have the click event on the row when I would click to delete something it would flash the single card display page which was undesirable. I have to do it this way because I cannot currently find a way to access the card id I needed to send into the delete method. Regardless, when one of the other spots on the table is clicked, the single card is displayed by calling the displaySingleCard method and sending in the card object on that row. This method stores the object's information in another card variable called selected which was previously null. When the HTML page reads that the selected variable is no longer null, the entire page is read to see where any conditionals are placed including that object. In this case, the only div that will display when selected is not null is the cardDetailDiv. Every other div will now be hidden because of their conditionals. These conditionals can get rather confusing as they continue to multiply, so one of the stretch goals of this project to be completed later is to include routing to clean up some of the conditionals. Although, some will still be necessary. 
+
+#### Update Card
+
+From this single card Display, I can select to return to the "Home Page" which is not necessarily a home page at this time but acts as the index of the project. This is done by calling the display table method which sets selected to null. Or I can choose to update the card's information. When the update button is pressed the setEditCard method is called. In this method, an object similar to selected called editCard is assigned the information of the current card object in focus. This is done with the Object.assign method which passes in the selected object's information. There is also a ternary operation in this method that is used to set the ng-model variable gradeNumber to the editCard's ID. This is needed to make the drop-down box on the update page default to the correct grade when the form is first displayed. Why this ternary is even necessary will be talked about shortly when I discuss the nullable foreign key "grade" that caused me much anguish throughout this building process. For now, though, the ternary checks to make sure that the edit cards grade id is not undefined and if it is not, assigns the edit cards grade id to the grade number variable and if it is sets it to null. From there, information about the card can be changed through the form and then sent to the updateCard method through the update card button. This is where the gradeNumber variable comes into play. I could not directly set the nullable object CardGrade to the edit cards id directly through ng-model, grade would always come back as null. So, the solution I arrived at was to store the value number from the drop-down box or the empty value passed in by the ungraded option in a nullable number type variable called gradeNumber. In the update, as well as the add card methods, this number must be checked to see if it is falsy or truthy so that it can either, set the card grade to null or assign the number stored inside it to the card grade. Unfortunately, a problem I have not figured out yet is how to simultaneously set the name so for now the solution is to make it an empty string. This does not prevent the grade name from being used later on in the HTML. Finally, the same XML process occurs as when calling the index method aside from some small differences in the request mapping and body being sent in, but once the card is returned I am taken back to the full collection table with the newest addition to the collection displayed in the table. Creating a card happens similarly, the main difference being the routing to get there, there is a button on the main page to the create form, the variable names, and parts of the backend REST process which have already been discussed. So, I will not belabor the create method. 
+
+#### DeleteCard
+
+The delete card is by far the simplest of the methods. It consists of only a single button on the main table that calls a click event to the delete card method passing in the spotlighted cards id. This id is then passed to the destroy method and used within the REST API to remove the card from the database. When the button is clicked all that can be seen is the row of the table being removed from the page. 
+
+#### Collection Summary
+
+The Collection summary part of this application is just underway at the time of writing this read me. Right now it only displays the total amount of cards, and if there are any present, the total number of rookie and autograph cards. The code for which is not very DRY. I will be later fixing this so that I can have a single reusable table for each of the properties of a card. I plan to implement a search feature that allows me to search by some of the object properties such as playerName, team, and year. Unfortunately, this is a little out of scope for the time limit of this project and the amount of time I spent fixing more function-dependent issues. However, it is a stretch goal I am excited to take on. 
+
+### Stretch Goals
+
+Speaking of stretch goals I have many that I would like to apply to this project after I graduate. Not only to make the project more complete but also to sharpen my skills with their processes. 
+
+1. Routing. I would like to be able to implement a nav bar so that the UI is much more friendly and movement through the pages more resembles a real-world website. 
+2. Implementing spring security. Make it so there can be user-specific collections more realistic to a real-world application. 
+3. Make cards activable and able to be deactivated as opposed to completely deleted from the database.
+4. Add a page that describes card grades and conditions. This should be fairly simple it was just not high on my list of priorities during this course. 
+5. A few goals that are similar to the previous one are to make the UI look cleaner. Things such as putting the create and update forms in a table so they are spaced nicely, adding more CSS so the page looks more lively, and showing card amounts if I have multiple of the same card. All of these should be fairly simple.
+
+There are also two non-function-dependent problems that I need to solve. These are not currently visible on the site. The first is that when a card is created and routed back to the single display screen the information for the condition and grade is not displayed. However, when I go to the home page and click back into the single card it is updated. As for the update method, when I routed back to the single display page none of the information is updated, but when I click back, in the same way, everything is updated again. I'm sure this is something small that I am missing for both, so I plan on fixing them first thing after being done with the course. 
 
 
  ## Technologies Used
@@ -113,6 +147,7 @@ The updateButton creates a click event that allows the updateCard method to be c
 * HTML
 * CSS
 * Javascript
+* Angular
 
 ## Lessons Learned
 
@@ -131,3 +166,12 @@ The updateButton creates a click event that allows the updateCard method to be c
 * As a side effect of the JavaScript XMLHttpRequest process, I learned about how to handle nullable foreign keys in a database. These objects must be handled differently than just a simple property of the JS object or even an object that is Not-Nullable. It is important to use correct logic in JS to ensure the correct data is added to the database. 
 
 * Finally, I learned another difficult lesson about a balance between using HTML and JS. In an earlier (not working) version of this project I was creating my update form entirely dynamically, which was a great exercise but was also very tedious and time-consuming. It would have been much more efficient to begin that process the way I ended it with a base HTML table and attaching the values using JS.
+
+
+###### Angular 
+
+* This project taught me a great amount about the file structure of an angular project, as well as how the different files are connected together and how they work together to touch the database. 
+
+*  As I also did with the Javascript front end I learned a great deal about working with nullable foreign keys. Having to create a placeholder variable so that I could model the grade id is probably not the best solution, but I will keep searching for a better one. 
+
+* The process of switching on and off variables and nulling and assigning objects was quite a learning experience especially when I got up to four different types of pages. 
