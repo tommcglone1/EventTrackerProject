@@ -111,11 +111,9 @@ export class HomeComponent {
     }
     this.cardService.create(card).subscribe({
       next: (createdCard) => {
-        console.log(createdCard);
         this.newCard = new Card();
         this.ngOnInit();
 
-        console.log(createdCard);
         this.reload();
         this.creating = false;
       },
@@ -138,7 +136,7 @@ export class HomeComponent {
       next: (updatedCard) => {
         console.log(updatedCard)
         this.editCard = null;
-        this.selected =null;
+        this.selected = null;
         this.reload();
       },
       error: (fail) => {
