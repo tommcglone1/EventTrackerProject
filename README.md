@@ -147,6 +147,7 @@ There are also two non-function-dependent problems that I need to solve. These a
 * HTML
 * CSS
 * Javascript
+* JSON
 * Angular
 
 ## Lessons Learned

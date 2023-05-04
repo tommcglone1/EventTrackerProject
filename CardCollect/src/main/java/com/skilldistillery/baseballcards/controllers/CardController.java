@@ -21,7 +21,7 @@ import com.skilldistillery.baseballcards.services.CardService;
 
 @RestController
 @RequestMapping("api")
-@CrossOrigin({"*", "http://localhost"})
+@CrossOrigin({ "*", "http://localhost/" })
 public class CardController {
 
 	@Autowired
