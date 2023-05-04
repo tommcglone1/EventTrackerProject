@@ -80,6 +80,21 @@ CREATE TABLE IF NOT EXISTS `card` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `User`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `User` ;
+
+CREATE TABLE IF NOT EXISTS `User` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(200) NOT NULL,
+  `enabled` TINYINT NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS collector@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -131,6 +146,16 @@ START TRANSACTION;
 USE `bbcarddb`;
 INSERT INTO `card` (`id`, `player_name`, `number`, `team`, `box_set`, `type`, `img_url`, `year`, `autographed`, `rookie`, `manufacturer`, `sale_value`, `trade_value`, `active`, `created`, `updated`, `sp_number`, `parallel`, `card_condition_id`, `grade_id`) VALUES (1, 'Ryan Howard', 'BSA-RH', 'Phillies', 'Series 1', 'Stars of MLB', 'https://i.ebayimg.com/images/g/NY8AAOSwSWpj8QMY/s-l1600.jpg', 2023, 1, 0, 'Topps', 16.50, 25.50, '1', NULL, NULL, '98/99', 'Black', 2, NULL);
 INSERT INTO `card` (`id`, `player_name`, `number`, `team`, `box_set`, `type`, `img_url`, `year`, `autographed`, `rookie`, `manufacturer`, `sale_value`, `trade_value`, `active`, `created`, `updated`, `sp_number`, `parallel`, `card_condition_id`, `grade_id`) VALUES (2, 'Hunter Greene', '155', 'Reds', 'Series 1', 'Base', 'https://i.ebayimg.com/images/g/S0gAAOSwa8Zj8rIh/s-l1600.jpg', 2023, 0, 0, 'Topps', 65.00, 85.00, '1', NULL, NULL, NULL, 'Gold Image SSP', 2, 8);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `User`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bbcarddb`;
+INSERT INTO `User` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'tom', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'standard');
 
 COMMIT;
 
