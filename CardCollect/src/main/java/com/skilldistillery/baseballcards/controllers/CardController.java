@@ -20,6 +20,7 @@ import com.skilldistillery.baseballcards.entities.Card;
 import com.skilldistillery.baseballcards.services.CardService;
 
 @CrossOrigin({ "*", "http://localhost/" })
+
 @RestController
 @RequestMapping("api")
 public class CardController {

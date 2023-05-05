@@ -17,6 +17,7 @@ import com.skilldistillery.baseballcards.services.AuthService;
 
 @RestController
 @CrossOrigin({"*", "http://localhost/"})
+
 public class AuthController {
 
 	@Autowired

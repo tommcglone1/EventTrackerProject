@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   tempTestDeleteMeLater() {
-    this.auth.login('admin', 'test').subscribe({
+    this.auth.login('tom', 'test').subscribe({
       // change username to match DB
       next: (data) => {
         console.log('Logged in:');
