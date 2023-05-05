@@ -1,6 +1,6 @@
 import { Card } from 'src/app/models/card';
 import { CardService } from './../../services/card.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { RookieCardPipe } from 'src/app/pipes/rookie-card.pipe';
 import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
@@ -11,7 +11,7 @@ import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
   cards: Card[] = [];
   cardProperties: string[] = [];
   newCard: Card = new Card();

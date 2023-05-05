@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.skilldistillery.baseballcards.entities.Card;
 import com.skilldistillery.baseballcards.services.CardService;
 
+@CrossOrigin({ "*", "http://localhost/" })
 @RestController
 @RequestMapping("api")
-@CrossOrigin({ "*", "http://localhost/" })
 public class CardController {
 
 	@Autowired
