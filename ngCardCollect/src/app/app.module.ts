@@ -9,6 +9,11 @@ import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { RookieCardPipe } from './pipes/rookie-card.pipe';
 import { AutoCardPipe } from './pipes/auto-card.pipe';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 
@@ -19,6 +24,9 @@ import { AutoCardPipe } from './pipes/auto-card.pipe';
     NavigationComponent,
     RookieCardPipe,
     AutoCardPipe,
+    RegisterComponent,
+    LoginComponent,
+    LogoutComponent,
 
   ],
   imports: [
@@ -26,6 +34,7 @@ import { AutoCardPipe } from './pipes/auto-card.pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgbModule,
 
   ],
   providers: [RookieCardPipe, AutoCardPipe],
