@@ -82,17 +82,42 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `User`
+-- Table `user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `User` ;
+DROP TABLE IF EXISTS `user` ;
 
-CREATE TABLE IF NOT EXISTS `User` (
+CREATE TABLE IF NOT EXISTS `user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(200) NOT NULL,
   `enabled` TINYINT NOT NULL,
   `role` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(75) NOT NULL,
   PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `user_has_card`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_has_card` ;
+
+CREATE TABLE IF NOT EXISTS `user_has_card` (
+  `user_id` INT NOT NULL,
+  `card_id` INT NOT NULL,
+  PRIMARY KEY (`user_id`, `card_id`),
+  INDEX `fk_user_has_card_card1_idx` (`card_id` ASC),
+  INDEX `fk_user_has_card_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_has_card_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_card_card1`
+    FOREIGN KEY (`card_id`)
+    REFERENCES `card` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 SET SQL_MODE = '';
@@ -151,11 +176,22 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `User`
+-- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `bbcarddb`;
-INSERT INTO `User` (`id`, `username`, `password`, `enabled`, `role`) VALUES (1, 'tom', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'standard');
+INSERT INTO `user` (`id`, `username`, `password`, `enabled`, `role`, `email`) VALUES (1, 'tom', '$2a$10$nShOi5/f0bKNvHB8x0u3qOpeivazbuN0NE4TO0LGvQiTMafaBxLJS', 1, 'standard', 'thomas.mcglone00@gmail.com');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `user_has_card`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `bbcarddb`;
+INSERT INTO `user_has_card` (`user_id`, `card_id`) VALUES (1, 1);
+INSERT INTO `user_has_card` (`user_id`, `card_id`) VALUES (1, 2);
 
 COMMIT;
 

@@ -46,7 +46,16 @@ class UserTest {
 	void test_user_entity_mapping() {
 		assertNotNull(user);
 		assertEquals("tom", user.getUsername());
+		assertEquals("thomas.mcglone00@gmail.com", user.getEmail());
 		assertEquals("standard", user.getRole());
+	}
+	
+	@Test
+	void test_User_has_Cards() {
+		
+		assertNotNull(user);
+		assertNotNull(user.getCards());
+		assertFalse(user.getCards().isEmpty());
 	}
 
 }

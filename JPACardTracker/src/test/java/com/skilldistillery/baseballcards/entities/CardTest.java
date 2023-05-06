@@ -72,5 +72,13 @@ class CardTest {
 		assertNotNull(card.getGrade());
 		assertEquals("Near Mint-Mint", card.getGrade().getName());
 	}
+	
+	@Test
+	void test_card_has_users() {
+		
+		assertNotNull(card);
+		assertNotNull(card.getUsers());
+		assertFalse(card.getUsers().isEmpty());
+	}
 
 }

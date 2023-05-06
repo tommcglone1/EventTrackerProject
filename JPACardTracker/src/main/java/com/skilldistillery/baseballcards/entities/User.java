@@ -1,11 +1,15 @@
 package com.skilldistillery.baseballcards.entities;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class User {
@@ -21,6 +25,15 @@ public class User {
 	private boolean enabled;
 	
 	private String role;
+	
+	private String email;
+	
+	
+	@ManyToMany
+	@JoinTable(name = "user_has_card", 
+	joinColumns = @JoinColumn(name = "user_id"), 
+	inverseJoinColumns = @JoinColumn(name = "card_id"))
+	private List<Card> cards;
 
 	public User() {
 		super();
@@ -65,6 +78,23 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
 	}
 
 	@Override

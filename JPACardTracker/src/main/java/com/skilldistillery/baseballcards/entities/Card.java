@@ -1,6 +1,7 @@
 package com.skilldistillery.baseballcards.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,10 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Card {
@@ -70,6 +74,10 @@ public class Card {
 	@ManyToOne
 	@JoinColumn(name="grade_id")
 	private CardGrade grade;
+	
+	@JsonIgnore
+	@ManyToMany(mappedBy="cards")
+	private List<User> users;
 	
 	public Card() {
 		super();
@@ -234,6 +242,16 @@ public class Card {
 
 	public void setGrade(CardGrade grade) {
 		this.grade = grade;
+	}
+	
+	
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	@Override
