@@ -9,6 +9,8 @@ import com.skilldistillery.baseballcards.entities.CardGrade;
 
 public interface CardRepository extends JpaRepository<Card, Integer>{
 
+	
+	List <Card> findByUser_Username(String username);
 	Card findById(int cardId);
 	
 	List <Card> findByPlayerNameLikeIgnoreCase(String playerName);

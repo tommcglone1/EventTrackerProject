@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreatecardComponent } from './components/createcard/createcard.component';
 
 
 
@@ -27,6 +28,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    CreatecardComponent,
 
   ],
   imports: [

@@ -19,8 +19,8 @@ public class CardServiceImpl implements CardService {
 	private CardRepository cardRepo;
 
 	@Override
-	public List<Card> listAllCards() {
-		return cardRepo.findAll();
+	public List<Card> listAllCards(String username) {
+		return cardRepo.findByUser_Username(username);
 
 	}
 

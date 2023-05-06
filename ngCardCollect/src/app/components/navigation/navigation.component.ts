@@ -37,10 +37,6 @@ export class NavigationComponent {
     })
   }
 
-
-
-
-
   login(user: User){
     console.log("Logging in:")
     console.log(user);

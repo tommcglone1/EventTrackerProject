@@ -14,7 +14,7 @@ import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
 export class HomeComponent implements OnInit{
   cards: Card[] = [];
   cardProperties: string[] = [];
-  newCard: Card = new Card();
+
   selected: Card | null = null;
   gradeNumber: number | null = null;
   editCard: Card | null = null;
@@ -54,13 +54,7 @@ export class HomeComponent implements OnInit{
   }
 
 
-  cardCreate(){
-    this.gradeNumber = null;
-    this.showStats = false;
-    this.selected = null;
-    this.editCard = null;
-    this.creating = true;
-  }
+
 
   displaySingleCard(card: Card) {
     this.showStats = false;
@@ -101,28 +95,7 @@ export class HomeComponent implements OnInit{
 
 
 
-  addCard(card: Card) {
-    console.log(card);
-    if (!this.gradeNumber) {
-      card.grade = null;
-    } else {
-      card.grade = { id: this.gradeNumber,
-      name: '' };
-    }
-    this.cardService.create(card).subscribe({
-      next: (createdCard) => {
-        this.newCard = new Card();
-        this.ngOnInit();
 
-        this.reload();
-        this.creating = false;
-      },
-      error: (fail) => {
-        console.error('Error creating card');
-        console.error(fail);
-      },
-    });
-  }
 
   updateCard(card: Card) {
     if (!this.gradeNumber) {

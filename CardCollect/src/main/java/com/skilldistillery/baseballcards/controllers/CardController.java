@@ -1,5 +1,6 @@
 package com.skilldistillery.baseballcards.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,8 +30,8 @@ public class CardController {
 	private CardService cardService;
 
 	@GetMapping("cards")
-	public List<Card> getCardList() {
-		return cardService.listAllCards();
+	public List<Card> getCardList(Principal principal) {
+		return cardService.listAllCards(principal.getName());
 	}
 
 	@GetMapping("cards/{cardId}")

@@ -23,6 +23,9 @@
           <a class="nav-link" [routerLink]="['/admin']">Admin</a>
         </li>
 
+        <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
+          <a class="nav-link" [routerLink]="['/createcard']">Add Card to Collection</a>
+        </li>
 
 
 

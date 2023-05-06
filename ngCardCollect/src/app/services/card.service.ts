@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Card } from '../models/card';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,12 @@ export class CardService {
 private url = environment.baseUrl + 'api/cards'
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private auth: AuthService
   ) {}
 
   index(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.url).pipe(
+    return this.http.get<Card[]>(this.url, this.getHttpOptions()) .pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -29,7 +31,7 @@ private url = environment.baseUrl + 'api/cards'
 
 
   show(cardId: number): Observable<Card>{
-    return this.http.get<Card>(this.url + '/' + cardId).pipe(
+    return this.http.get<Card>(this.url + '/' + cardId, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -43,7 +45,7 @@ private url = environment.baseUrl + 'api/cards'
     card.active = true;
 
 
-    return this.http.post<Card>(this.url, card).pipe(
+    return this.http.post<Card>(this.url, card, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -54,7 +56,7 @@ private url = environment.baseUrl + 'api/cards'
   }
 
   update(card: Card): Observable<Card>{
-    return this.http.put<Card>(this.url +'/'+ card.id, card).pipe(
+    return this.http.put<Card>(this.url +'/'+ card.id, card, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -67,7 +69,7 @@ private url = environment.baseUrl + 'api/cards'
 
   destroy(cardId: number): Observable<void>{
 
-    return this.http.delete<void>(this.url +'/'+ cardId).pipe(
+    return this.http.delete<void>(this.url +'/'+ cardId, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -77,6 +79,15 @@ private url = environment.baseUrl + 'api/cards'
     );
   }
 
+  getHttpOptions() {
+    let options = {
+      headers: {
+        Authorization: 'Basic ' + this.auth.getCredentials(),
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+    };
+    return options;
+  }
 
   }
 
