@@ -20,7 +20,7 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public List<Card> listAllCards(String username) {
-		return cardRepo.findByUser_Username(username);
+		return cardRepo.findByUsers_Username(username);
 
 	}
 
