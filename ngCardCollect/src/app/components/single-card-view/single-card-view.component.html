@@ -1,0 +1,82 @@
+<div id="cardDetailDiv" *ngIf="selected">
+
+  <h1>Card Number: {{selected.number}}</h1>
+  <img class="cardImgDetailDiv"src={{selected.imgURL}}>
+  <table class="table-bordered">
+    <tbody>
+      <tr>
+        <td>Player Name: </td>
+        <td>{{selected.playerName}}</td>
+      </tr>
+
+      <tr *ngIf="selected.team">
+        <td>Team: </td>
+        <td>{{selected.team}}</td>
+      </tr>
+
+      <tr *ngIf="selected.boxSet">
+        <td>Box Set </td>
+        <td>{{selected.boxSet}}</td>
+      </tr>
+
+      <tr *ngIf="selected.type">
+        <td>Type/Variation: </td>
+        <td>{{selected.type}}</td>
+      </tr>
+
+      <tr *ngIf="selected.year">
+        <td>Year:  </td>
+        <td>{{selected.year}}</td>
+      </tr>
+
+      <tr *ngIf="selected.manufacturer">
+        <td>Manufacturer: </td>
+        <td>{{selected.manufacturer}}</td>
+      </tr>
+
+      <tr *ngIf="selected.spNumber">
+        <td>SP Number: </td>
+        <td>{{selected.spNumber}}</td>
+      </tr>
+
+      <tr *ngIf="selected.parallel">
+        <td>Parallel: </td>
+        <td>{{selected.parallel}}</td>
+      </tr>
+
+      <tr *ngIf="selected.saleValue">
+        <td>Sale Value: </td>
+        <td>{{selected.saleValue | currency:'USD'}}</td>
+      </tr>
+
+      <tr *ngIf="selected.tradeValue">
+        <td>Trade Value: </td>
+        <td>{{selected.tradeValue | currency:'USD'}}</td>
+      </tr>
+
+      <tr *ngIf="selected.rookie">
+        <td>Rookie Card</td>
+        <td>&#10004;</td>
+      </tr>
+
+      <tr *ngIf="selected.autographed">
+
+        <td>AutoGraphed: </td>
+        <td>&#10004;</td>
+      </tr>
+
+      <tr *ngIf="selected.condition.name">
+        <td>Card Condition:  </td>
+        <td>{{selected.condition.name}}</td>
+      </tr>
+
+      <tr *ngIf="selected.grade">
+        <td>Grade</td>
+        <td>{{selected.grade.id}} {{selected.grade.name}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+  <!-- <button class="btn btn-info" (click)="setEditCard()">Update</button> -->
+
+</div>

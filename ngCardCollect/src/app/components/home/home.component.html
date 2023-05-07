@@ -1,33 +1,7 @@
 
 
 
-<button class="btn btn-primary" *ngIf="!creating && !editCard && !selected" (click)="showStats = true">View Collection Summary</button>
-<div>
-  <table class="table table-striped table-hover" *ngIf="!selected && !editCard && !creating && !showStats">
-    <thead>
-      <tr>
 
-      <th>Card Number</th>
-      <th>Player Name</th>
-      <th>Box Set</th>
-      <th></th>
-
-
-      <tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let card of cards" >
-
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-        <td><button class="btn btn-danger" (click)="deleteCard(card.id)">Remove From Collection</button></td>
-
-      </tr>
-
-    </tbody>
-  </table>
 
 <div id="cardDetailDiv" *ngIf="selected && !editCard && !creating">
 
@@ -179,7 +153,7 @@
 </div>
 
 
-<div id="collectionStats" *ngIf="showStats">
+<!-- <div id="collectionStats" *ngIf="showStats">
   <h1>Total Cards: {{cardCount()}}</h1>
   <table class="table table-bordered" *ngIf="displayRookieCardsCount() > 0">
     <thead>
@@ -204,9 +178,9 @@
 
     </tbody>
 
-  </table>
+  </table> -->
 
-
+<!--
   <table class="table table-bordered"  *ngIf="displayAutoCardsCount() > 0">
     <thead>
       <tr>
@@ -232,4 +206,4 @@
 
   </table>
   <button class="btn btn-secondary" (click)="displayTable();">Home</button>
-</div>
+</div> -->

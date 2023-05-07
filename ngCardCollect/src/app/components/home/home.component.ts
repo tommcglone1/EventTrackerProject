@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit{
     ) {}
 
   ngOnInit(): void {
-    this.reload();
+
   }
 
   cardCount(): number{
@@ -56,10 +56,7 @@ export class HomeComponent implements OnInit{
 
 
 
-  displaySingleCard(card: Card) {
-    this.showStats = false;
-    this.selected = card;
-  }
+
 
   setEditCard(){
     this.showStats = false;
@@ -73,25 +70,7 @@ export class HomeComponent implements OnInit{
     this.selected = null;
   }
 
-  reload() {
-    this.showStats =false;
-    this.cardService.index().subscribe({
-      next: (data) => {
-        this.cards = data;
-        data.forEach((card) => {
-          if(card.imgURL === ""){
-            card.imgURL = 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
-          }
 
-        });
-
-      },
-      error: (fail) => {
-        console.error('Error reloading');
-        console.error(fail);
-      },
-    });
-  }
 
 
 
@@ -110,7 +89,7 @@ export class HomeComponent implements OnInit{
         console.log(updatedCard)
         this.editCard = null;
         this.selected = null;
-        this.reload();
+
       },
       error: (fail) => {
         console.error('Error updating card');
@@ -122,7 +101,7 @@ export class HomeComponent implements OnInit{
   deleteCard(cardId: number) {
     this.cardService.destroy(cardId).subscribe({
       next: () => {
-        this.reload();
+
         this.selected=null;
       },
       error: (fail) => {

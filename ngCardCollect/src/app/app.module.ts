@@ -14,6 +14,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatecardComponent } from './components/createcard/createcard.component';
+import { SingleCardViewComponent } from './components/single-card-view/single-card-view.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -29,6 +31,8 @@ import { CreatecardComponent } from './components/createcard/createcard.componen
     LoginComponent,
     LogoutComponent,
     CreatecardComponent,
+    SingleCardViewComponent,
+    ProfileComponent,
 
   ],
   imports: [

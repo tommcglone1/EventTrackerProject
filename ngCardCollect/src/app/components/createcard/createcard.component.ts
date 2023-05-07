@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
 import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
 import { RookieCardPipe } from 'src/app/pipes/rookie-card.pipe';
@@ -16,7 +17,8 @@ export class CreatecardComponent implements OnInit{
 
   constructor(private cardService: CardService,
     private rookieCardPipe: RookieCardPipe,
-    private autoCardPipe: AutoCardPipe
+    private autoCardPipe: AutoCardPipe,
+    private router: Router
     ) {}
 
     ngOnInit(): void{
@@ -34,7 +36,7 @@ export class CreatecardComponent implements OnInit{
       this.cardService.create(card).subscribe({
         next: (createdCard) => {
           this.newCard = new Card();
-          this.ngOnInit();
+          this.router.navigateByUrl('/home');
 
 
 
