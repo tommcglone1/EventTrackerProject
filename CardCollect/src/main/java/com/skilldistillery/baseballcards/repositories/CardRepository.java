@@ -11,7 +11,7 @@ public interface CardRepository extends JpaRepository<Card, Integer>{
 
 	
 	List <Card> findByUsers_Username(String username);
-	Card findById(int cardId);
+	Card findByIdAndUsers_Username(int cardId, String username);
 	
 	List <Card> findByPlayerNameLikeIgnoreCase(String playerName);
 	long countByPlayerNameLikeIgnoreCase(String playerName);

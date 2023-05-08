@@ -2,6 +2,7 @@ package com.skilldistillery.baseballcards.entities;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -95,6 +96,20 @@ public class User {
 
 	public void setCards(List<Card> cards) {
 		this.cards = cards;
+	}
+	
+	public void addCard (Card card){
+		if(cards == null) { cards = new ArrayList<>();}
+		if(!cards.contains (card)){
+			cards.add(card); card.addUser(this);
+		}
+	}
+	
+	public void removeGrocery (Card card) {
+		if(cards != null && cards.contains (card)){
+			cards.remove(card);
+			card.removeUser(this);
+		}
 	}
 
 	@Override

@@ -39,7 +39,7 @@ export class Card {
     spNumber: string = '',
     parallel: string = '',
     condition: CardCondition = new CardCondition(),
-    grade: CardGrade = new CardGrade()
+    grade: CardGrade| null = null
 
   ) {
     this.id = id;

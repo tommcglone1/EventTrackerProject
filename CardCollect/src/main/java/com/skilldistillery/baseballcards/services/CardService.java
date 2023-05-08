@@ -7,10 +7,10 @@ import com.skilldistillery.baseballcards.entities.Card;
 public interface CardService {
 
 	List<Card> listAllCards(String username);
-	Card getCard(int cardId);
-	Card create(Card card); 
-	Card update(int cardId, Card card);
-	boolean deleteById(int cardId);
+	Card getCard(int cardId, String username);
+	Card create(String username, Card card); 
+	Card update(int cardId, String username, Card card);
+//	boolean delete(String username, int cardId);
 	
 	List <Card> findByPlayerNameLikeIgnoreCase(String playerName);
 	long countByPlayerNameLikeIgnoreCase(String playerName);

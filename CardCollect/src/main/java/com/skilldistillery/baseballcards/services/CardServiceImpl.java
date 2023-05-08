@@ -8,15 +8,20 @@ import org.springframework.stereotype.Service;
 import com.skilldistillery.baseballcards.entities.Card;
 import com.skilldistillery.baseballcards.entities.CardCondition;
 import com.skilldistillery.baseballcards.entities.CardGrade;
+import com.skilldistillery.baseballcards.entities.User;
 import com.skilldistillery.baseballcards.repositories.CardConditionRepository;
 import com.skilldistillery.baseballcards.repositories.CardGradeRepository;
 import com.skilldistillery.baseballcards.repositories.CardRepository;
+import com.skilldistillery.baseballcards.repositories.UserRepository;
 
 @Service
 public class CardServiceImpl implements CardService {
 
 	@Autowired
 	private CardRepository cardRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Card> listAllCards(String username) {
@@ -25,20 +30,25 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Card getCard(int cardId) {
-		Card card = cardRepo.findById(cardId);
+	public Card getCard(int cardId, String username) {
+		Card card = cardRepo.findByIdAndUsers_Username(cardId, username);
 		return card;
 	}
 
 	@Override
-	public Card create(Card card) {
-		
-		return cardRepo.saveAndFlush(card);
+	public Card create(String username, Card card) {
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			card.addUser(user);
+			card.setActive(true);
+			 return cardRepo.saveAndFlush(card);
+		}
+		return null;
 	}
 
 	@Override
-	public Card update(int cardId, Card card) {
-		Card original = cardRepo.findById(cardId);
+	public Card update(int cardId, String username, Card card) {
+		Card original = cardRepo.findByIdAndUsers_Username(cardId, username);
 		
 		if (original != null) {
 			original.setPlayerName(card.getPlayerName());
@@ -63,16 +73,16 @@ public class CardServiceImpl implements CardService {
 		return cardRepo.saveAndFlush(original);
 	}
 
-	@Override
-	public boolean deleteById(int cardId) {
-		boolean deleted = false;
-		Card toDelete = cardRepo.findById(cardId);
-		if (toDelete != null) {
-			cardRepo.delete(toDelete);
-			deleted = true;
-		}
-		return deleted;
-	}
+//	@Override
+//	public boolean delete(String username, int cardId) {
+//		boolean deleted = false;
+//		Card toDelete = cardRepo.findByIdAndUsers_Username(username, cardId);
+//		if (toDelete != null) {
+//			cardRepo.delete(toDelete);
+//			deleted = true;
+//		}
+//		return deleted;
+//	} will be later reserved for admin
 
 	@Override
 	public List<Card> findByPlayerNameLikeIgnoreCase(String playerName) {

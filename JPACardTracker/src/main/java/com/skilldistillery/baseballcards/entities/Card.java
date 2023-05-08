@@ -3,6 +3,7 @@ package com.skilldistillery.baseballcards.entities;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -252,6 +253,21 @@ public class Card {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+	
+	public void addUser(User user) {
+		if (users == null) { users = new ArrayList<>();}
+		if (!users.contains(user)) {
+			users.add(user);
+			user.addCard(this);
+		}
+	}
+	
+	public void removeUser(User user) {
+		if(users != null && users.contains(user)) {
+			users.remove(user);
+			user.removeGrocery(this);
+		}
 	}
 
 	@Override

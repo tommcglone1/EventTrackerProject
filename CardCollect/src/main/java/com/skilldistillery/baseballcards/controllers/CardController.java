@@ -35,8 +35,8 @@ public class CardController {
 	}
 
 	@GetMapping("cards/{cardId}")
-	public Card getCard(@PathVariable int cardId, HttpServletResponse response) {
-		Card card = cardService.getCard(cardId);
+	public Card getCard(@PathVariable int cardId, Principal principal, HttpServletResponse response) {
+		Card card = cardService.getCard(cardId, principal.getName());
 		if (card == null) {
 			response.setStatus(404);
 		}
@@ -44,10 +44,10 @@ public class CardController {
 	}
 
 	@PostMapping("cards")
-	public Card createCard(@RequestBody Card card, HttpServletResponse response, HttpServletRequest request) {
+	public Card createCard(Principal principal, @RequestBody Card card, HttpServletResponse response, HttpServletRequest request) {
 		Card created = null;
 		try {
-			created = cardService.create(card);
+			created = cardService.create(principal.getName(), card);
 			response.setStatus(201);
 			StringBuffer url = request.getRequestURL();
 			url.append("/").append(card.getId());
@@ -61,10 +61,10 @@ public class CardController {
 	}
 
 	@PutMapping("cards/{cardId}")
-	public Card updateCard(@RequestBody Card card, @PathVariable int cardId, HttpServletResponse response) {
+	public Card updateCard(Principal principal, @RequestBody Card card, @PathVariable int cardId, HttpServletResponse response) {
 		Card updated = null;
 		try {
-			updated = cardService.update(cardId, card);
+			updated = cardService.update(cardId, principal.getName(), card);
 			if (updated == null) {
 				response.setStatus(404);
 			}
@@ -77,19 +77,19 @@ public class CardController {
 		return updated;
 	}
 
-	@DeleteMapping("cards/{cardId}")
-	public void deleteCard(@PathVariable int cardId, HttpServletResponse response) {
-		try {
-			if (cardService.deleteById(cardId)) {
-				response.setStatus(204);
-			} else {
-				response.setStatus(404);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			response.setStatus(400);
-		}
-	}
+//	@DeleteMapping("cards/{cardId}")
+//	public void deleteCard(Principal principal, @PathVariable int cardId, HttpServletResponse response) {
+//		try {
+//			if (cardService.delete(principal.getName(), cardId)) {
+//				response.setStatus(204);
+//			} else {
+//				response.setStatus(404);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			response.setStatus(400);
+//		}
+//	}
 
 	@GetMapping("cards/search/playerName/{playerName}")
 	public List<Card> findCardsByPlayerName(@PathVariable String playerName) {
