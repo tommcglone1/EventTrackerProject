@@ -266,7 +266,7 @@ public class Card {
 	public void removeUser(User user) {
 		if(users != null && users.contains(user)) {
 			users.remove(user);
-			user.removeGrocery(this);
+			user.removeCard(this);
 		}
 	}
 

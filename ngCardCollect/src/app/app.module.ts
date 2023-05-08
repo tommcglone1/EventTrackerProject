@@ -16,6 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatecardComponent } from './components/createcard/createcard.component';
 import { SingleCardViewComponent } from './components/single-card-view/single-card-view.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { CollectionComponent } from './components/collection/collection.component';
 
 
 
@@ -33,6 +34,7 @@ import { ProfileComponent } from './components/profile/profile.component';
     CreatecardComponent,
     SingleCardViewComponent,
     ProfileComponent,
+    CollectionComponent,
 
   ],
   imports: [

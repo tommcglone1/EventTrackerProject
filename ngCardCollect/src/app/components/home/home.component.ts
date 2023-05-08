@@ -98,16 +98,16 @@ export class HomeComponent implements OnInit{
     });
   }
 
-  deleteCard(cardId: number) {
-    this.cardService.destroy(cardId).subscribe({
-      next: () => {
+  // deleteCard(cardId: number) {
+  //   this.cardService.destroy(cardId).subscribe({
+  //     next: () => {
 
-        this.selected=null;
-      },
-      error: (fail) => {
-        console.error('Error deleting card');
-        console.error(fail);
-      },
-    });
-  }
+  //       this.selected=null;
+  //     },
+  //     error: (fail) => {
+  //       console.error('Error deleting card');
+  //       console.error(fail);
+  //     },
+  //   });
+  // }
 }

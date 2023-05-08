@@ -105,7 +105,7 @@ public class User {
 		}
 	}
 	
-	public void removeGrocery (Card card) {
+	public void removeCard (Card card) {
 		if(cards != null && cards.contains (card)){
 			cards.remove(card);
 			card.removeUser(this);

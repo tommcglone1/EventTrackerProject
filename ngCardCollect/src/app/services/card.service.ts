@@ -67,17 +67,17 @@ private url = environment.baseUrl + 'api/cards'
   }
 
 
-  destroy(cardId: number): Observable<void>{
+  // destroy(cardId: number): Observable<void>{
 
-    return this.http.delete<void>(this.url +'/'+ cardId, this.getHttpOptions()).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error(`Card.Delete(): error deleteing card: ${err}`)
-        );
-      })
-    );
-  }
+  //   return this.http.delete<void>(this.url +'/'+ cardId, this.getHttpOptions()).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(
+  //         () => new Error(`Card.Delete(): error deleteing card: ${err}`)
+  //       );
+  //     })
+  //   );
+  // }
 
   getHttpOptions() {
     let options = {

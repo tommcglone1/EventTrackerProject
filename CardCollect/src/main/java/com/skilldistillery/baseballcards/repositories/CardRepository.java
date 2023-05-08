@@ -8,7 +8,8 @@ import com.skilldistillery.baseballcards.entities.Card;
 import com.skilldistillery.baseballcards.entities.CardGrade;
 
 public interface CardRepository extends JpaRepository<Card, Integer>{
-
+	
+	Card findById(int cardId);
 	
 	List <Card> findByUsers_Username(String username);
 	Card findByIdAndUsers_Username(int cardId, String username);

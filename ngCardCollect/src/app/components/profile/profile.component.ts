@@ -4,6 +4,8 @@ import { Card } from 'src/app/models/card';
 import { AutoCardPipe } from 'src/app/pipes/auto-card.pipe';
 import { RookieCardPipe } from 'src/app/pipes/rookie-card.pipe';
 import { CardService } from 'src/app/services/card.service';
+import { CollectionService } from 'src/app/services/collection.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +19,9 @@ export class ProfileComponent implements OnInit{
   constructor(private cardService: CardService,
     private rookieCardPipe: RookieCardPipe,
     private autoCardPipe: AutoCardPipe,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private collectionService: CollectionService,
     ) {}
 
     ngOnInit(){
@@ -44,7 +48,7 @@ export class ProfileComponent implements OnInit{
     }
 
     deleteCard(cardId: number) {
-      this.cardService.destroy(cardId).subscribe({
+      this.collectionService.removeCardFromCollection(cardId).subscribe({
         next: () => {
           this.reload();
 

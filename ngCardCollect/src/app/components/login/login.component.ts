@@ -21,7 +21,7 @@ export class LoginComponent {
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
 
-        this.router.navigateByUrl('/home');
+        this.router.navigateByUrl('/profile');
         this.ngOnInit();
       },
       error: (problem) => {
