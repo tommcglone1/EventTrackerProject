@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit{
       this.cardService.index().subscribe({
         next: (data) => {
           this.cards = data;
+          console.log("index")
           data.forEach((card) => {
             if(card.imgURL === ""){
               card.imgURL = 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'

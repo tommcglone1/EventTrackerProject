@@ -1,7 +1,9 @@
-<div id="cardDetailDiv" *ngIf="selected">
+<div id="cardDetailDiv" *ngIf="selected &&!editCard">
 
   <h1>Card Number: {{selected.number}}</h1>
   <img class="cardImgDetailDiv"src={{selected.imgURL}}>
+  <br><br>
+  <button class="btn btn-info" (click)="setEditCard()">Edit Card</button>
   <table class="table-bordered">
     <tbody>
       <tr>
@@ -77,6 +79,70 @@
 
     </tbody>
   </table>
-  <!-- <button class="btn btn-info" (click)="setEditCard()">Update</button> -->
+
+</div>
+
+
+<div id="cardEdit" *ngIf="editCard">
+
+  <form *ngIf="editCard">
+
+    <label for="number">Card Number: </label>
+    <input type="text" name="number" [(ngModel)]="editCard.number"><br>
+    <label for="playerName">Player Name: </label>
+    <input type="text" name="playerName" [(ngModel)]="editCard.playerName"><br>
+    <label for="team">Team: </label>
+    <input type="text" name="team" [(ngModel)]="editCard.team"><br>
+    <label for="boxSet">Card Set: </label>
+    <input type="text" name="boxSet" [(ngModel)]="editCard.boxSet"><br>
+    <label for="type">Card type/variation: </label>
+    <input type="text" name="type" [(ngModel)]="editCard.type"><br>
+    <label for="year">Card Year: </label>
+    <input type="number" name="year" [(ngModel)]="editCard.year"><br>
+    <label for="manufacturer">Manufacturer: </label>
+    <input type="text" name="manufacturer" [(ngModel)]="editCard.manufacturer"><br>
+    <label for="spNumber">SP Number: </label>
+    <input type="text" name="spNumber" [(ngModel)]="editCard.spNumber"><br>
+    <label for="parallel">Parallel Name: </label>
+    <input type="text" name="parallel" [(ngModel)]="editCard.parallel"><br>
+    <label for="saleValue">Sale Value: </label>
+    <input type="number" name="saleValue" [(ngModel)]="editCard.saleValue"><br>
+    <label for="tradeValue">Trade Value: </label>
+    <input type="number" name="tradeValue" [(ngModel)]="editCard.tradeValue"><br>
+    <label for="imgURL">URL image of card: </label>
+    <input type="text" name="imgURL" [(ngModel)]="editCard.imgURL"><br>
+    <label for="autographed"> Is this card autographed?</label>
+    <input type="checkbox" name="autographed"  [(ngModel)]="editCard.autographed"><br>
+    <label for="condition">What is this cards condition?</label>
+    <select name="condition" [(ngModel)]="editCard.condition.id">
+
+      <option value="1">Near Mint or Better</option>
+      <option value="2">Excellent</option>
+      <option value="3">Very Good</option>
+      <option value="4">Good</option>
+      <option value="5">Poor</option>
+    </select><br>
+
+    <label for="grade">If this card is graded, select its numbered grade: </label>
+    <select name="grade" id="grade"  [(ngModel)]="gradeNumber">
+      <option value="" >Ungraded</option>
+      <option value="10">10</option>
+      <option value="9">9</option>
+      <option value="8">8</option>
+      <option value="7">7</option>
+      <option value="6">6</option>
+      <option value="5">5</option>
+      <option value="4">4</option>
+      <option value="3">3</option>
+      <option value="2">2</option>
+      <option value="1">1</option>
+    </select><br>
+
+
+    <button class="btn btn-success" (click)="updateCard(editCard)" >Update Card </button>
+
+
+
+  </form>
 
 </div>

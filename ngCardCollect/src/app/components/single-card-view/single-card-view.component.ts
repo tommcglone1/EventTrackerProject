@@ -11,6 +11,8 @@ import { CardService } from 'src/app/services/card.service';
 export class SingleCardViewComponent {
 
   selected: Card | null = null;
+  gradeNumber: number | null = null;
+  editCard: Card | null = null;
 
   constructor(
     private currentRoute: ActivatedRoute,
@@ -36,4 +38,32 @@ export class SingleCardViewComponent {
     });
   }
 
+  setEditCard(){
+
+
+    this.editCard = Object.assign({}, this.selected);
+    this.gradeNumber  = this.editCard?.grade?.id !== undefined ? this.editCard?.grade?.id: null;
+  }
+  updateCard(card: Card) {
+    if (!this.gradeNumber) {
+      card.grade = null;
+    } else {
+      card.grade = { id: this.gradeNumber,
+      name: '' };
+    }
+
+    this.cardService.update(card).subscribe({
+      next: (updatedCard) => {
+        console.log(updatedCard)
+        this.editCard = null;
+        this.findCardById(updatedCard.id)
+
+
+      },
+      error: (fail) => {
+        console.error('Error updating card');
+        console.error(fail);
+      },
+    });
+  }
 }
