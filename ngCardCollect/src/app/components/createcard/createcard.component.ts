@@ -36,7 +36,7 @@ export class CreatecardComponent implements OnInit{
       this.cardService.create(card).subscribe({
         next: (createdCard) => {
           this.newCard = new Card();
-          this.router.navigateByUrl('/profile');
+          this.router.navigateByUrl('/collection');
 
 
 
