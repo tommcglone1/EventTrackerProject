@@ -12,59 +12,11 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
-  cards: Card[] = [];
-  selected: Card | null = null;
+export class ProfileComponent{
 
-  constructor(private cardService: CardService,
-    private rookieCardPipe: RookieCardPipe,
-    private autoCardPipe: AutoCardPipe,
-    private router: Router,
-    private userService: UserService,
-    private collectionService: CollectionService,
+
+  constructor(
     ) {}
 
-    ngOnInit(){
-      this.reload();
-    }
-    reload() {
 
-      this.cardService.index().subscribe({
-        next: (data) => {
-          this.cards = data;
-          console.log("index")
-          data.forEach((card) => {
-            if(card.imgURL === ""){
-              card.imgURL = 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
-            }
-
-          });
-
-        },
-        error: (fail) => {
-          console.error('Error reloading');
-          console.error(fail);
-        },
-      });
-    }
-
-    deleteCard(cardId: number) {
-      this.collectionService.removeCardFromCollection(cardId).subscribe({
-        next: () => {
-          this.reload();
-
-        },
-        error: (fail) => {
-          console.error('Error deleting card');
-          console.error(fail);
-        },
-      });
-    }
-
-  displaySingleCard(card: Card) {
-
-
-    this.router.navigateByUrl('/singleCardView/' + card.id);
-
-  }
 }

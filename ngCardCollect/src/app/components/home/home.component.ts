@@ -58,17 +58,6 @@ export class HomeComponent implements OnInit{
 
 
 
-  setEditCard(){
-    this.showStats = false;
-
-    this.editCard = Object.assign({}, this.selected);
-    this.gradeNumber  = this.editCard?.grade?.id !== undefined ? this.editCard?.grade?.id: null;
-  }
-
-  displayTable() {
-    this.showStats = false;
-    this.selected = null;
-  }
 
 
 
@@ -76,27 +65,9 @@ export class HomeComponent implements OnInit{
 
 
 
-  updateCard(card: Card) {
-    if (!this.gradeNumber) {
-      card.grade = null;
-    } else {
-      card.grade = { id: this.gradeNumber,
-      name: '' };
-    }
 
-    this.cardService.update(card).subscribe({
-      next: (updatedCard) => {
-        console.log(updatedCard)
-        this.editCard = null;
-        this.selected = null;
 
-      },
-      error: (fail) => {
-        console.error('Error updating card');
-        console.error(fail);
-      },
-    });
-  }
+
 
   // deleteCard(cardId: number) {
   //   this.cardService.destroy(cardId).subscribe({

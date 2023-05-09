@@ -1,27 +1,3 @@
-<button class="btn btn-primary">View Collection Summary</button>
-
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-
-      <th>Card Number</th>
-      <th>Player Name</th>
-      <th>Box Set</th>
-      <th></th>
+<button class="btn btn-primary" [routerLink]="['/collection']">View Collection Summary</button>
 
 
-      <tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let card of cards" >
-
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-        <td><button class="btn btn-danger" (click)="deleteCard(card.id)">Remove From Collection</button></td>
-
-      </tr>
-
-    </tbody>
-  </table>
