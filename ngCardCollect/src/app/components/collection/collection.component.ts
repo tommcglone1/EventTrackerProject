@@ -14,10 +14,8 @@ import { UserService } from 'src/app/services/user.service';
 export class CollectionComponent {
   cards: Card[] = [];
   selected: Card | null = null;
-  filters: Filters |null = null;
+  filters: Filters | null = null;
   cardFilter: Filters | null = null;
-
-
 
   constructor(
     private cardService: CardService,
@@ -67,16 +65,12 @@ export class CollectionComponent {
   cardCount(): number {
     return this.cards.length;
   }
-  searchForCards(){
-    this.cardFilter= null;
+  searchForCards() {
     this.filters = new Filters();
-    console.log(this.filters)
   }
 
-  setFilters(filters: Filters){
+  setFilters(filters: Filters) {
     this.cardFilter = this.filters;
-    // this.reload()
-    console.log(this.cardFilter);
-    this.filters =null;
+    this.filters = null;
   }
 }

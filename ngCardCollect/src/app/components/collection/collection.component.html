@@ -2,7 +2,7 @@
 
 
 
-<button (click)="searchForCards()">Filter Cards</button>
+<button *ngIf="!filters" (click)="searchForCards()">Filter Cards</button>
 
 
 
@@ -24,6 +24,7 @@
   <input type="checkbox" name="autographed" [(ngModel)]="filters.autographed"><br>
   <button  type="button" (click)="setFilters(filters)">Filter</button>
 </form>
+<button (click)="filters = null">Close form</button>
 </div>
 
 
@@ -62,3 +63,4 @@
     </tr>
   </tbody>
 </table>
+<button (click)="cardFilter = null" *ngIf="cardFilter">Return to Collection</button>
