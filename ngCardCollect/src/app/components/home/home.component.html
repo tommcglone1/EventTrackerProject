@@ -2,6 +2,10 @@
 
 
 <h1>Welcome to Card Collect</h1>
+<div id="register-div">
+
+  <app-register></app-register>
+</div>
 
 
 
@@ -9,57 +13,3 @@
 
 
 
-<!-- <div id="collectionStats" *ngIf="showStats">
-  <h1>Total Cards: {{cardCount()}}</h1>
-  <table class="table table-bordered" *ngIf="displayRookieCardsCount() > 0">
-    <thead>
-      <tr>
-        <h4>Total Rookie Cards: {{displayRookieCardsCount()}}</h4>
-
-      </tr>
-      <tr>
-      <th>Card Number</th>
-      <th>Player Name</th>
-      <th>Box Set</th>
-      <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let card of cards | rookieCard">
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-      </tr>
-
-    </tbody>
-
-  </table> -->
-
-<!--
-  <table class="table table-bordered"  *ngIf="displayAutoCardsCount() > 0">
-    <thead>
-      <tr>
-        <h4>Total Autographed Cards: {{displayAutoCardsCount()}}</h4>
-
-      </tr>
-      <tr>
-      <th>Card Number</th>
-      <th>Player Name</th>
-      <th>Box Set</th>
-      <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let card of cards | autoCard">
-      <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
-      <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
-      <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-      <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-    </tr>
-
-  </tbody>
-
-</table>
-  <button class="btn btn-secondary" (click)="displayTable();">Home</button>
-</div> -->

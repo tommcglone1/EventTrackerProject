@@ -1,4 +1,4 @@
-<h3 class="title">Register:</h3><br>
+<h3 *ngIf="!loggedIn()" class="title">Register:</h3><br>
 <form class="styled-Form" name="registration" *ngIf="!loggedIn()">
   <label for="email">Email: </label>
   <input type="text" name="email" placeholder="email" [(ngModel)]="newUser.email"><br><br>

@@ -22,6 +22,7 @@ import { CardTypePipe } from './pipes/card-type.pipe';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { CardTypePipe } from './pipes/card-type.pipe';
     ProfileComponent,
     CollectionComponent,
     CardTypePipe,
+
 
   ],
   imports: [
