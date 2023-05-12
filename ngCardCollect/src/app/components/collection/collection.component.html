@@ -1,33 +1,48 @@
-<h1>Total Cards: {{ cardCount() }}</h1>
+<h1 *ngIf="!filters">Total Cards: {{ cardCount() }}</h1>
 
+<button *ngIf="!filters" (click)="searchForCards()">Filter All Cards</button>
 
-
-<button *ngIf="!filters" (click)="searchForCards()">Filter Cards</button>
-
-
-
-<div *ngIf="filters">
+<div class="styled-Form" *ngIf="filters">
   <form name="filterCardForm" id="filterCardForm">
     <label for="playerName">Player Name: </label>
-    <input type="text" name="playerName" [(ngModel)]="filters.playerName"><br>
+    <input type="text" name="playerName" [(ngModel)]="filters.playerName" />
+
     <label for="team">Team: </label>
-    <input type="text" name="team" [(ngModel)]="filters.team"><br>
+    <input
+      type="text"
+      name="team"
+
+      [(ngModel)]="filters.team"
+    /><br />
+
     <label for="manufacturer">Manufacturer: </label>
-    <input type="text" name="manufacturer" [(ngModel)]="filters.manufacturer"><br>
+    <input
+      type="text"
+      name="manufacturer"
+
+      [(ngModel)]="filters.manufacturer"
+    /><br />
     <label for="boxSet">Card Set: </label>
-    <input type="text" name="boxSet" [(ngModel)]="filters.boxSet"><br>
-  <label for="year">Card Year: </label>
-  <input type="number" name="year" [(ngModel)]="filters.year"><br>
-  <label for="rookie">If this a Rookie Card check this box.</label>
-  <input type="checkbox" name="rookie" [(ngModel)]="filters.rookie"><br>
-  <label>Is this card is autographed check this box.</label>
-  <input type="checkbox" name="autographed" [(ngModel)]="filters.autographed"><br>
-  <button  type="button" (click)="setFilters(filters)">Filter</button>
-</form>
-<button (click)="filters = null">Close form</button>
+    <input
+      type="text"
+      name="boxSet"
+
+      [(ngModel)]="filters.boxSet"
+    /><br />
+    <label for="year">Card Year: </label>
+    <input type="number" name="year" [(ngModel)]="filters.year" /><br />
+    <label for="rookie">Rookie Cards:</label>
+    <input type="checkbox" name="rookie" [(ngModel)]="filters.rookie" /><br />
+    <label>Autographed cards:</label>
+    <input
+      type="checkbox"
+      name="autographed"
+      [(ngModel)]="filters.autographed"
+    /><br />
+    <button type="button" (click)="setFilters(filters)">Filter</button>
+  </form>
+  <button (click)="filters = null">Close Filter</button>
 </div>
-
-
 
 <table class="table table-striped table-hover">
   <thead>
@@ -42,7 +57,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let card of cards | cardType: cardFilter">
+    <tr *ngFor="let card of cards | cardType : cardFilter">
       <td id="tableClick" (click)="displaySingleCard(card)">
         {{ card.number }}
       </td>
@@ -63,4 +78,6 @@
     </tr>
   </tbody>
 </table>
-<button (click)="cardFilter = null" *ngIf="cardFilter">Return to Collection</button>
+<button (click)="cardFilter = null" *ngIf="cardFilter">
+  Return to Collection
+</button>

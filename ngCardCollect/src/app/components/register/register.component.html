@@ -1,9 +1,9 @@
 <h3 class="title">Register:</h3><br>
-<form class="styled-form" name="registration" *ngIf="!loggedIn()">
+<form class="styled-Form" name="registration" *ngIf="!loggedIn()">
+  <label for="email">Email: </label>
+  <input type="text" name="email" placeholder="email" [(ngModel)]="newUser.email"><br><br>
   <label for="username">Username: </label>
 <input type="text" name="username" placeholder="Username" [(ngModel)]="newUser.username"><br><br>
-<!-- <label for="email">Email: </label> -->
-<!-- <input type="text" name="email" placeholder="email" [(ngModel)]="newUser.email"><br><br> -->
 <label for="password">Password: </label>
 <input type="password" name="password" placeholder="password" [(ngModel)]="newUser.password"><br><br>
 
