@@ -17,6 +17,7 @@ import { CreatecardComponent } from './components/createcard/createcard.componen
 import { SingleCardViewComponent } from './components/single-card-view/single-card-view.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { CollectionComponent } from './components/collection/collection.component';
+import { CardTypePipe } from './pipes/card-type.pipe';
 
 
 
@@ -35,6 +36,7 @@ import { CollectionComponent } from './components/collection/collection.componen
     SingleCardViewComponent,
     ProfileComponent,
     CollectionComponent,
+    CardTypePipe,
 
   ],
   imports: [

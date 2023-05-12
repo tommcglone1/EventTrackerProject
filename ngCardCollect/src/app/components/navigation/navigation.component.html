@@ -1,15 +1,25 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <button  (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      (click)="isCollapsed = !isCollapsed"
+      [attr.aria-expanded]="!isCollapsed"
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarTogglerDemo01"
+      aria-controls="navbarTogglerDemo01"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon navbar-light"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01"
-    [ngbCollapse]='isCollapsed'>
+    <div
+      class="collapse navbar-collapse"
+      id="navbarTogglerDemo01"
+      [ngbCollapse]="isCollapsed"
+    >
       <a class="navbar-brand" [routerLink]="['/home']">Card Collect</a>
       <ul class="navbar-nav">
-
-
-
         <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
           <a class="nav-link" [routerLink]="['/profile']">Profile</a>
         </li>
@@ -18,61 +28,50 @@
           <a class="nav-link" [routerLink]="['/register']">Register</a>
         </li>
 
-
         <li class="nav-item" *ngIf="loggedIn() && adminUser !== null">
           <a class="nav-link" [routerLink]="['/admin']">Admin</a>
         </li>
 
         <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
-          <a class="nav-link" [routerLink]="['/createcard']">Add Card to Collection</a>
+          <a class="nav-link" [routerLink]="['/createcard']"
+            >Add Card to Collection</a
+          >
         </li>
 
+        <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
+          <a class="nav-link" [routerLink]="['/collection']"
+            >View My Collection</a
+          >
+        </li>
 
+        <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            [(ngModel)]="loginUser.username"
+          />
+        </li>
 
-        <table class="login">
-        <thead>
+        <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            [(ngModel)]="loginUser.password"
+          />
+        </li>
 
-
-          <th>
-
-            <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
-
-              <label for="username">Username: </label>
-              <input type="text" name="username" placeholder="Username" [(ngModel)]="loginUser.username">
-            </li>
-          </th>
-          <th>
-          <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
-
-            <label for="password">Password: </label>
-            <input type="password" name="password" placeholder="password" [(ngModel)]="loginUser.password">
-          </li>
-        </th>
-
-        <th>
-          <li class="nav-item" *ngIf="!loggedIn() && adminUser === null">
-
-
-            <button (click)="login(loginUser)" class="btn btn-primary">Log In</button>
-          </li>
-        </th>
-
-        </thead>
-
-
-        </table>
-
-
-
-
-
+        <li class="nav-item" *ngIf="!loggedIn() && adminUser === null">
+          <button (click)="login(loginUser)" class="btn btn-primary">
+            Log In
+          </button>
+        </li>
 
         <li *ngIf="loggedIn()">
-
           <button class="btn btn-primary" (click)="logout()">Log Out</button>
         </li>
       </ul>
-
     </div>
   </div>
 </nav>

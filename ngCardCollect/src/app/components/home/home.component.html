@@ -52,14 +52,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let card of cards | autoCard">
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
-        <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
-      </tr>
+      <td id="tableClick" (click)="displaySingleCard(card)">{{card.number}}</td>
+      <td id="tableClick" (click)="displaySingleCard(card)">{{card.playerName}}</td>
+      <td id="tableClick" (click)="displaySingleCard(card)">{{card.boxSet}}</td>
+      <td id="tableClick" (click)="displaySingleCard(card)"><img class="cardImgTable" src="{{card.imgURL}}"></td>
+    </tr>
 
-    </tbody>
+  </tbody>
 
-  </table>
+</table>
   <button class="btn btn-secondary" (click)="displayTable();">Home</button>
 </div> -->
