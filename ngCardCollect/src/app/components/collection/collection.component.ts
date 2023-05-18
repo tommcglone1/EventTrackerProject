@@ -1,3 +1,4 @@
+import { CardTypePipe } from './../../pipes/card-type.pipe';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
@@ -20,8 +21,8 @@ export class CollectionComponent {
   constructor(
     private cardService: CardService,
     private router: Router,
-    private userService: UserService,
-    private collectionService: CollectionService
+    private collectionService: CollectionService,
+    private cardTypePipe: CardTypePipe
   ) {}
 
   ngOnInit() {
@@ -46,7 +47,7 @@ export class CollectionComponent {
     });
   }
 
-  deleteCard(cardId: number) {
+  removeCard(cardId: number) {
     this.collectionService.removeCardFromCollection(cardId).subscribe({
       next: () => {
         this.reload();
@@ -63,7 +64,7 @@ export class CollectionComponent {
   }
 
   cardCount(): number {
-    return this.cards.length;
+    return this.cardTypePipe.transform(this.cards, this.cardFilter).length;
   }
   searchForCards() {
     this.filters = new Filters();

@@ -19,17 +19,11 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CollectionComponent } from './components/collection/collection.component';
 import { CardTypePipe } from './pipes/card-type.pipe';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavigationComponent,
-    RookieCardPipe,
-    AutoCardPipe,
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
@@ -38,8 +32,6 @@ import { CardTypePipe } from './pipes/card-type.pipe';
     ProfileComponent,
     CollectionComponent,
     CardTypePipe,
-
-
   ],
   imports: [
     BrowserModule,
@@ -47,9 +39,8 @@ import { CardTypePipe } from './pipes/card-type.pipe';
     FormsModule,
     HttpClientModule,
     NgbModule,
-
   ],
-  providers: [RookieCardPipe, AutoCardPipe],
-  bootstrap: [AppComponent]
+  providers: [CardTypePipe],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -8,27 +8,16 @@
     <input type="text" name="playerName" [(ngModel)]="filters.playerName" />
 
     <label for="team">Team: </label>
-    <input
-      type="text"
-      name="team"
-
-      [(ngModel)]="filters.team"
-    /><br />
+    <input type="text" name="team" [(ngModel)]="filters.team" /><br />
 
     <label for="manufacturer">Manufacturer: </label>
     <input
       type="text"
       name="manufacturer"
-
       [(ngModel)]="filters.manufacturer"
     /><br />
     <label for="boxSet">Card Set: </label>
-    <input
-      type="text"
-      name="boxSet"
-
-      [(ngModel)]="filters.boxSet"
-    /><br />
+    <input type="text" name="boxSet" [(ngModel)]="filters.boxSet" /><br />
     <label for="year">Card Year: </label>
     <input type="number" name="year" [(ngModel)]="filters.year" /><br />
     <label for="rookie">Rookie Cards:</label>
@@ -71,7 +60,7 @@
         <img class="cardImgTable" src="{{ card.imgURL }}" />
       </td>
       <td>
-        <button class="btn btn-danger" (click)="deleteCard(card.id)">
+        <button class="btn btn-danger" (click)="removeCard(card.id)">
           Remove From Collection
         </button>
       </td>

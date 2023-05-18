@@ -18,19 +18,15 @@
       id="navbarTogglerDemo01"
       [ngbCollapse]="isCollapsed"
     >
-      <a class="navbar-brand" [routerLink]="['/home']">Card Collect</a>
+      <a class="navbar-brand" [routerLink]="['/home']">CC</a>
       <ul class="navbar-nav">
         <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
           <a class="nav-link" [routerLink]="['/profile']">Profile</a>
         </li>
 
-        <li class="nav-item" *ngIf="!loggedIn()">
-          <a class="nav-link" [routerLink]="['/register']">Register</a>
-        </li>
-
-        <li class="nav-item" *ngIf="loggedIn() && adminUser !== null">
+        <!-- <li class="nav-item" *ngIf="loggedIn() && adminUser !== null">
           <a class="nav-link" [routerLink]="['/admin']">Admin</a>
-        </li>
+        </li> -->
 
         <li class="nav-item" *ngIf="loggedIn() && adminUser === null">
           <a class="nav-link" [routerLink]="['/createcard']"
@@ -44,32 +40,8 @@
           >
         </li>
 
-        <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            [(ngModel)]="loginUser.username"
-          />
-        </li>
-
-        <li class="login-label" *ngIf="!loggedIn() && adminUser === null">
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-            [(ngModel)]="loginUser.password"
-          />
-        </li>
-
-        <li class="nav-item" *ngIf="!loggedIn() && adminUser === null">
-          <button (click)="login(loginUser)" class="btn btn-primary">
-            Log In
-          </button>
-        </li>
-
         <li *ngIf="loggedIn()">
-          <button class="btn btn-primary" (click)="logout()">Log Out</button>
+          <app-logout></app-logout>
         </li>
       </ul>
     </div>
