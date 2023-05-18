@@ -1,25 +1,35 @@
-<form id="login-form" class="styled-Form" name="login" *ngIf="!loggedIn()">
-  <input
-    type="text"
-    name="username"
-    placeholder="Username"
-    [(ngModel)]="loginUser.username"
-  /><br />
+<div class="styled-Form" *ngIf="!loggedIn()">
+  <form name="login">
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      [(ngModel)]="loginUser.username"
+    /><br />
 
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    [(ngModel)]="loginUser.password"
-  /><br />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      [(ngModel)]="loginUser.password"
+    /><br />
 
-  <button id="login-button" (click)="login(loginUser)" class="btn btn-primary">
-    Log In
-  </button>
-  <hr />
-</form>
-<div id="reg-button" *ngIf="!loggedIn()">
-  <button class="btn btn-success" [routerLink]="['/register']">
-    Create Account
-  </button>
+    <button
+      id="login-button"
+      (click)="login(loginUser)"
+      class="btn btn-primary"
+    >
+      Log In
+    </button>
+    <hr />
+  </form>
+  <div *ngIf="!loggedIn()">
+    <button
+      id="register-button"
+      class="btn btn-success"
+      [routerLink]="['/register']"
+    >
+      Create Account
+    </button>
+  </div>
 </div>

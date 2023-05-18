@@ -1,8 +1,12 @@
-<h1 *ngIf="!filters">Total Cards: {{ cardCount() }}</h1>
+<h1>Total Cards: {{ cardCount() }}</h1>
 
-<button *ngIf="!filters" (click)="searchForCards()">Filter All Cards</button>
+<button *ngIf="!filters" class="btn btn-info" (click)="searchForCards()">
+  Filter All Cards
+</button>
 
 <div class="styled-Form" *ngIf="filters">
+  <h3>Filter Your Collection</h3>
+  <h5>Select any combination of categories to filter by:</h5>
   <form name="filterCardForm" id="filterCardForm">
     <label for="playerName">Player Name: </label>
     <input type="text" name="playerName" [(ngModel)]="filters.playerName" />
@@ -28,9 +32,20 @@
       name="autographed"
       [(ngModel)]="filters.autographed"
     /><br />
-    <button type="button" (click)="setFilters(filters)">Filter</button>
+    <br />
+    <button
+      id="filter-button"
+      type="button"
+      class="btn btn-info"
+      (click)="setFilters(filters)"
+    >
+      Filter
+    </button>
   </form>
-  <button (click)="filters = null">Close Filter</button>
+  <hr />
+  <button id="filter-close" class="btn btn-warning" (click)="filters = null">
+    Close Filter
+  </button>
 </div>
 
 <table class="table table-striped table-hover">

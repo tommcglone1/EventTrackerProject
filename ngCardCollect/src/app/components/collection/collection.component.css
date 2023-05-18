@@ -1,0 +1,25 @@
+#filter-button{
+ padding-left: 15px;
+ padding-right: 15px;
+  height:auto;
+  width:auto;
+  margin: -20px -35px;
+  position:relative;
+  top:50%;
+  left:50%;
+
+}
+#filter-close{
+
+  height:auto;
+  width:auto;
+  margin: -20px -60px;
+  position:relative;
+  top:50%;
+  left:50%;
+
+}
+
+.styled-Form{
+  padding-bottom: 25px;
+}
