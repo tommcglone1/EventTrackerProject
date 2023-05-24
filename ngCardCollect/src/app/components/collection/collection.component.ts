@@ -5,7 +5,6 @@ import { Card } from 'src/app/models/card';
 import { Filters } from 'src/app/models/filters';
 import { CardService } from 'src/app/services/card.service';
 import { CollectionService } from 'src/app/services/collection.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-collection',
@@ -16,7 +15,6 @@ export class CollectionComponent {
   cards: Card[] = [];
   selected: Card | null = null;
   filters: Filters | null = null;
-  cardFilter: Filters | null = null;
 
   constructor(
     private cardService: CardService,
@@ -64,14 +62,10 @@ export class CollectionComponent {
   }
 
   cardCount(): number {
-    return this.cardTypePipe.transform(this.cards, this.cardFilter).length;
-  }
-  searchForCards() {
-    this.filters = new Filters();
+    return this.cardTypePipe.transform(this.cards, this.filters).length;
   }
 
-  setFilters(filters: Filters) {
-    this.cardFilter = this.filters;
-    this.filters = null;
+  handleFiltersSetting(setFilters: Filters | null) {
+    this.filters = setFilters;
   }
 }

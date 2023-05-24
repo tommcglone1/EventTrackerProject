@@ -7,8 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { RookieCardPipe } from './pipes/rookie-card.pipe';
-import { AutoCardPipe } from './pipes/auto-card.pipe';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -18,6 +16,7 @@ import { SingleCardViewComponent } from './components/single-card-view/single-ca
 import { ProfileComponent } from './components/profile/profile.component';
 import { CollectionComponent } from './components/collection/collection.component';
 import { CardTypePipe } from './pipes/card-type.pipe';
+import { FilterComponent } from './components/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +31,7 @@ import { CardTypePipe } from './pipes/card-type.pipe';
     ProfileComponent,
     CollectionComponent,
     CardTypePipe,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

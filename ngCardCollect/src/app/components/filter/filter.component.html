@@ -1,0 +1,47 @@
+<button *ngIf="!filters" class="btn btn-info" (click)="searchForCards()">
+  Filter All Cards
+</button>
+
+<div class="styled-Form" *ngIf="filters">
+  <h3>Filter Your Collection</h3>
+  <h5>Select any combination of categories to filter by:</h5>
+  <form name="filterCardForm" id="filterCardForm">
+    <label for="playerName">Player Name: </label>
+    <input type="text" name="playerName" [(ngModel)]="filters.playerName" />
+
+    <label for="team">Team: </label>
+    <input type="text" name="team" [(ngModel)]="filters.team" /><br />
+
+    <label for="manufacturer">Manufacturer: </label>
+    <input
+      type="text"
+      name="manufacturer"
+      [(ngModel)]="filters.manufacturer"
+    /><br />
+    <label for="boxSet">Card Set: </label>
+    <input type="text" name="boxSet" [(ngModel)]="filters.boxSet" /><br />
+    <label for="year">Card Year: </label>
+    <input type="number" name="year" [(ngModel)]="filters.year" /><br />
+    <label for="rookie">Rookie Cards:</label>
+    <input type="checkbox" name="rookie" [(ngModel)]="filters.rookie" /><br />
+    <label>Autographed cards:</label>
+    <input
+      type="checkbox"
+      name="autographed"
+      [(ngModel)]="filters.autographed"
+    /><br />
+    <br />
+    <button
+      id="filter-button"
+      type="button"
+      class="btn btn-info"
+      (click)="setFilters(filters)"
+    >
+      Filter
+    </button>
+  </form>
+  <hr />
+  <button id="filter-close" class="btn btn-warning" (click)="filters = null">
+    Close Filter
+  </button>
+</div>
