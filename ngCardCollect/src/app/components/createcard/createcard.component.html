@@ -1,43 +1,84 @@
-<div class="styled-Form">
+<div class="buttons">
+  <div class="centerButton" *ngIf="!createNewCard && !searchBar">
+    <button (click)="createNewCard = true">Create Card From Scratch</button>
+  </div>
+
+  <div class="searchButton" *ngIf="!createNewCard && !searchBar">
+    <button (click)="searchBar = true">Search For card</button>
+  </div>
+</div>
+
+<div class="styled-Form" *ngIf="createNewCard">
+  <button (click)="createNewCard = false">Back</button>
   <h1>Create a Card</h1>
   <form name="newCardForm" id="newCardForm">
     <label for="number">Card Number: </label>
-    <input type="text" name="number" [(ngModel)]="newCard.number"><br>
+    <input
+      type="text"
+      name="number"
+      [(ngModel)]="newCard.number"
+      required
+      minlength="4"
+    />
+    <br />
     <label for="playerName">Player Name: </label>
-    <input type="text" name="playerName" [(ngModel)]="newCard.playerName"><br>
+    <input
+      type="text"
+      name="playerName"
+      required
+      [(ngModel)]="newCard.playerName"
+    /><br />
     <label for="team">Team: </label>
-    <input type="text" name="team" [(ngModel)]="newCard.team"><br>
+    <input type="text" name="team" [(ngModel)]="newCard.team" /><br />
     <label for="boxSet">Card Set: </label>
-    <input type="text" name="boxSet" [(ngModel)]="newCard.boxSet"><br>
+    <input type="text" name="boxSet" [(ngModel)]="newCard.boxSet" /><br />
     <label for="type">Card type/variation: </label>
-    <input type="text" name="type" [(ngModel)]="newCard.type"><br>
+    <input type="text" name="type" [(ngModel)]="newCard.type" /><br />
     <label for="year">Card Year: </label>
-    <input type="number" name="year" [(ngModel)]="newCard.year"><br>
+    <input type="number" name="year" [(ngModel)]="newCard.year" /><br />
     <label for="manufacturer">Manufacturer: </label>
-    <input type="text" name="manufacturer" [(ngModel)]="newCard.manufacturer"><br>
+    <input
+      type="text"
+      name="manufacturer"
+      [(ngModel)]="newCard.manufacturer"
+    /><br />
     <label for="spNumber">SP Number: </label>
-    <input type="text" name="spNumber" [(ngModel)]="newCard.spNumber"><br>
+    <input type="text" name="spNumber" [(ngModel)]="newCard.spNumber" /><br />
     <label for="parallel">Parallel Name: </label>
-    <input type="text" name="parallel" [(ngModel)]="newCard.parallel"><br>
+    <input type="text" name="parallel" [(ngModel)]="newCard.parallel" /><br />
     <label for="saleValue">Sale Value: </label>
-    <input type="number" name="saleValue" [(ngModel)]="newCard.saleValue"><br>
+    <input
+      type="number"
+      name="saleValue"
+      [(ngModel)]="newCard.saleValue"
+    /><br />
     <label for="tradeValue">Trade Value: </label>
-    <input type="number" name="tradeValue" [(ngModel)]="newCard.tradeValue"><br>
+    <input
+      type="number"
+      name="tradeValue"
+      [(ngModel)]="newCard.tradeValue"
+    /><br />
     <label for="imgURL">URL image of card: </label>
-    <input type="text" name="imgURL" [(ngModel)]="newCard.imgURL"><br>
+    <input type="text" name="imgURL" [(ngModel)]="newCard.imgURL" /><br />
     <label for="rookie">If this a Rookie Card check this box.</label>
-    <input type="checkbox" name="rookie" [(ngModel)]="newCard.rookie"><br>
+    <input type="checkbox" name="rookie" [(ngModel)]="newCard.rookie" /><br />
     <label>Is this card is autographed check this box.</label>
-    <input type="checkbox" name="autographed" [(ngModel)]="newCard.autographed"><br>
+    <input
+      type="checkbox"
+      name="autographed"
+      [(ngModel)]="newCard.autographed"
+    /><br />
     <label for="condition">What is this cards condition?</label>
-    <select name="condition" [(ngModel)]="newCard.condition.id" >
+    <select name="condition" [(ngModel)]="newCard.condition.id">
       <option value="1">Near Mint or Better</option>
       <option value="2">Excellent</option>
       <option value="3">Very Good</option>
       <option value="4">Good</option>
-      <option value="5">Poor</option>
-    </select><br>
-    <label for="grade">If this card is graded, select its numbered grade: </label>
+      <option value="5">Poor</option></select
+    ><br />
+    <label for="grade"
+      >If this card is graded, select its numbered grade:
+    </label>
     <select name="grade" [(ngModel)]="gradeNumber">
       <option value="">Ungraded</option>
       <option value="10">10</option>
@@ -49,9 +90,17 @@
       <option value="4">4</option>
       <option value="3">3</option>
       <option value="2">2</option>
-      <option value="1">1</option>
-    </select><br>
-    <button class="btn btn-success" (click)="addCard(newCard)">Add to Collection</button>
-
+      <option value="1">1</option></select
+    ><br />
+    <button class="btn btn-success" (click)="addCard(newCard)">
+      Add to Collection
+    </button>
+    <hr />
   </form>
-  </div>
+</div>
+
+<div *ngIf="searchBar">
+  <table>
+    <thead></thead>
+  </table>
+</div>

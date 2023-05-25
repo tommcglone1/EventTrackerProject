@@ -5,7 +5,7 @@ export class Card {
   id: number;
   active: boolean;
   playerName: string;
-  number: number;
+  number: string;
   team: string | null;
   boxSet: string | null;
   type: string | null;
@@ -19,13 +19,13 @@ export class Card {
   spNumber: string | null;
   parallel: string | null;
   condition: CardCondition;
-  grade: CardGrade| null;
+  grade: CardGrade | null;
 
   constructor(
     id: number = 0,
     active: boolean = false,
     playerName: string = '',
-    number: number = 0,
+    number: string = '',
     team: string = '',
     boxSet: string = '',
     type: string = '',
@@ -39,11 +39,10 @@ export class Card {
     spNumber: string = '',
     parallel: string = '',
     condition: CardCondition = new CardCondition(),
-    grade: CardGrade| null = null
-
+    grade: CardGrade | null = null
   ) {
     this.id = id;
-    this.active =active;
+    this.active = active;
     this.playerName = playerName;
     this.number = number;
     this.team = team;

@@ -1,0 +1,17 @@
+
+
+.centerButton{
+  position: relative;
+  left: 60%;
+  top: 250px;
+
+
+
+
+
+}
+.searchButton{
+position: absolute;
+left: 25%;
+top: 310px;
+}

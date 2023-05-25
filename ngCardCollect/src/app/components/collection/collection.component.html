@@ -1,6 +1,17 @@
 <h1>Total Cards: {{ cardCount() }}</h1>
 
 <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
+<br />
+<tr *ngIf="filters">
+  <h5>Filters Applied:</h5>
+  <p *ngIf="filters.playerName">Name: {{ filters.playerName }}</p>
+  <p *ngIf="filters.boxSet">Set: {{ filters.boxSet }}</p>
+  <p *ngIf="filters.team">Team: {{ filters.team }}</p>
+  <p *ngIf="filters.manufacturer">Manufacturer: {{ filters.manufacturer }}</p>
+  <p *ngIf="filters.year">Year: {{ filters.year }}</p>
+  <p *ngIf="filters.rookie">Rookie Card?: &#10004;</p>
+  <p *ngIf="filters.autographed">Auto?: &#10004;</p>
+</tr>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -10,8 +21,6 @@
       <th>Box Set</th>
       <th></th>
     </tr>
-
-    <tr></tr>
   </thead>
 
   <tbody>

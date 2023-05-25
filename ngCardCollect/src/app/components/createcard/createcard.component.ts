@@ -12,6 +12,8 @@ import { CardService } from 'src/app/services/card.service';
 export class CreatecardComponent implements OnInit {
   newCard: Card = new Card();
   gradeNumber: number | null = null;
+  createNewCard: boolean = false;
+  searchBar: boolean = false;
 
   constructor(private cardService: CardService, private router: Router) {}
 
