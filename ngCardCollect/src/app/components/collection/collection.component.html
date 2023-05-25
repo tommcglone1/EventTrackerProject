@@ -26,7 +26,14 @@
         {{ card.boxSet }}
       </td>
       <td id="tableClick" (click)="displaySingleCard(card)">
-        <img class="cardImgTable" src="{{ card.imgURL }}" />
+        <img
+          class="cardImgTable"
+          src="{{
+            card.imgURL
+              ? card.imgURL
+              : 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
+          }}"
+        />
       </td>
       <td>
         <button class="btn btn-danger" (click)="removeCard(card.id)">

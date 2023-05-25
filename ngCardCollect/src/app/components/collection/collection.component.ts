@@ -30,13 +30,6 @@ export class CollectionComponent {
     this.cardService.index().subscribe({
       next: (data) => {
         this.cards = data;
-
-        data.forEach((card) => {
-          if (card.imgURL === '') {
-            card.imgURL =
-              'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png';
-          }
-        });
       },
       error: (fail) => {
         console.error('Error reloading');
