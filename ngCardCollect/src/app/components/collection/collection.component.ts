@@ -61,4 +61,19 @@ export class CollectionComponent {
   handleFiltersSetting(setFilters: Filters | null) {
     this.filters = setFilters;
   }
+
+  handleAppliedFiltersSetting(setFilters: Filters | null) {
+    let noFilters = true;
+    this.filters = setFilters;
+    this.reload();
+
+    for (const key in this.filters) {
+      if (this.filters[key]) {
+        noFilters = false;
+      }
+    }
+    if (noFilters) {
+      this.filters = null;
+    }
+  }
 }

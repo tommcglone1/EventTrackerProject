@@ -1,0 +1,58 @@
+<div *ngIf="filters">
+  <h5>Filters Applied:</h5>
+
+  <div *ngIf="filters.playerName">
+    <p>
+      Name: {{ filters.playerName }}
+      <button (click)="removeFilter('playerName')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.boxSet">
+    <p>
+      Set: {{ filters.boxSet }}
+
+      <button (click)="removeFilter('boxSet')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.team">
+    <p>
+      Team: {{ filters.team }}
+
+      <button (click)="removeFilter('team')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.manufacturer">
+    <p>
+      Manufacturer: {{ filters.manufacturer }}
+
+      <button (click)="removeFilter('manufacturer')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.year">
+    <p>
+      Year: {{ filters.year }}
+
+      <button (click)="removeFilter('year')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.rookie">
+    <p>
+      Rookie Card?: &#10004;
+
+      <button (click)="removeFilter('rookie')">X</button>
+    </p>
+  </div>
+
+  <div *ngIf="filters.autographed">
+    <p>
+      Auto?: &#10004;
+
+      <button (click)="removeFilter('autographed')">X</button>
+    </p>
+  </div>
+</div>

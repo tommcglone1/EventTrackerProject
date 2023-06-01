@@ -17,6 +17,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CollectionComponent } from './components/collection/collection.component';
 import { CardTypePipe } from './pipes/card-type.pipe';
 import { FilterComponent } from './components/filter/filter.component';
+import { AppliedFiltersComponent } from './components/applied-filters/applied-filters.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FilterComponent } from './components/filter/filter.component';
     CollectionComponent,
     CardTypePipe,
     FilterComponent,
+    AppliedFiltersComponent,
   ],
   imports: [
     BrowserModule,
