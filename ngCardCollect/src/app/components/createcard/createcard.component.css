@@ -15,3 +15,8 @@ position: absolute;
 left: 25%;
 top: 310px;
 }
+
+.errorText{
+  color: red;
+  font-size: 12px;
+}

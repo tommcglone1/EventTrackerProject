@@ -11,23 +11,39 @@
 <div class="styled-Form" *ngIf="createNewCard">
   <button (click)="createNewCard = false">Back</button>
   <h1>Create a Card</h1>
-  <form name="newCardForm" id="newCardForm">
-    <label for="number">Card Number: </label>
+  <p>Boxes marked with (*) require input to create a card!</p>
+  <form name="newCardForm" id="newCardForm" #myForm="ngForm">
+    <label for="number">* Card Number: </label>
     <input
       type="text"
       name="number"
-      [(ngModel)]="newCard.number"
       required
-      minlength="4"
+      [(ngModel)]="newCard.number"
+      #number="ngModel"
     />
+    <div *ngIf="number.invalid && (number.dirty || number.touched)">
+      <div class="errorText" *ngIf="number.errors && number.errors['required']">
+        Card Number is required.
+      </div>
+    </div>
     <br />
-    <label for="playerName">Player Name: </label>
+    <label for="playerName">* Player Name: </label>
     <input
       type="text"
       name="playerName"
+      #playerName="ngModel"
       required
       [(ngModel)]="newCard.playerName"
-    /><br />
+    />
+    <div *ngIf="playerName.invalid && (playerName.dirty || playerName.touched)">
+      <div
+        class="errorText"
+        *ngIf="playerName.errors && playerName.errors['required']"
+      >
+        Player Name is required.
+      </div>
+    </div>
+    <br />
     <label for="team">Team: </label>
     <input type="text" name="team" [(ngModel)]="newCard.team" /><br />
     <label for="boxSet">Card Set: </label>
@@ -68,14 +84,28 @@
       name="autographed"
       [(ngModel)]="newCard.autographed"
     /><br />
-    <label for="condition">What is this cards condition?</label>
-    <select name="condition" [(ngModel)]="newCard.condition.id">
+    <label for="condition">* What is this cards condition?</label>
+    <select
+      name="condition"
+      [(ngModel)]="newCard.condition.id"
+      required
+      #condition="ngModel"
+    >
       <option value="1">Near Mint or Better</option>
       <option value="2">Excellent</option>
       <option value="3">Very Good</option>
       <option value="4">Good</option>
-      <option value="5">Poor</option></select
-    ><br />
+      <option value="5">Poor</option>
+    </select>
+    <div *ngIf="condition.invalid && (condition.dirty || condition.touched)">
+      <div
+        class="errorText"
+        *ngIf="condition.errors && condition.errors['required']"
+      >
+        The Card's Condition is required.
+      </div>
+    </div>
+    <br />
     <label for="grade"
       >If this card is graded, select its numbered grade:
     </label>
@@ -92,7 +122,11 @@
       <option value="2">2</option>
       <option value="1">1</option></select
     ><br />
-    <button class="btn btn-success" (click)="addCard(newCard)">
+    <button
+      class="btn btn-success"
+      [disabled]="myForm.invalid"
+      (click)="addCard(newCard)"
+    >
       Add to Collection
     </button>
     <hr />
