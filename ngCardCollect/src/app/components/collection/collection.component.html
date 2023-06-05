@@ -12,6 +12,7 @@
     <tr>
       <th>Card Number</th>
       <th>Player Name</th>
+      <th>Year</th>
       <th>Box Set</th>
       <th></th>
     </tr>
@@ -24,6 +25,9 @@
       </td>
       <td id="tableClick" (click)="displaySingleCard(card)">
         {{ card.playerName }}
+      </td>
+      <td id="tableClick" (click)="displaySingleCard(card)">
+        {{ card.year }}
       </td>
       <td id="tableClick" (click)="displaySingleCard(card)">
         {{ card.boxSet }}

@@ -6,20 +6,16 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardService {
+  private url = environment.baseUrl + 'api/cards';
+  private allCardurl = environment.baseUrl + 'api/allCards';
 
-
-private url = environment.baseUrl + 'api/cards'
-
-  constructor(
-    private http: HttpClient,
-    private auth: AuthService
-  ) {}
+  constructor(private http: HttpClient, private auth: AuthService) {}
 
   index(): Observable<Card[]> {
-    return this.http.get<Card[]>(this.url, this.getHttpOptions()) .pipe(
+    return this.http.get<Card[]>(this.url, this.getHttpOptions()).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
@@ -28,22 +24,32 @@ private url = environment.baseUrl + 'api/cards'
       })
     );
   }
-
-
-  show(cardId: number): Observable<Card>{
-    return this.http.get<Card>(this.url + '/' + cardId, this.getHttpOptions()).pipe(
+  getAllCards(): Observable<Card[]> {
+    return this.http.get<Card[]>(this.allCardurl).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-          () => new Error('Card.show(): error retrieving card: ' + err)
+          () => new Error('Card.getAllCards(): error retrieving cards: ' + err)
         );
       })
     );
   }
 
-  create(card: Card): Observable<Card>{
-    card.active = true;
+  show(cardId: number): Observable<Card> {
+    return this.http
+      .get<Card>(this.url + '/' + cardId, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () => new Error('Card.show(): error retrieving card: ' + err)
+          );
+        })
+      );
+  }
 
+  create(card: Card): Observable<Card> {
+    card.active = true;
 
     return this.http.post<Card>(this.url, card, this.getHttpOptions()).pipe(
       catchError((err: any) => {
@@ -55,17 +61,18 @@ private url = environment.baseUrl + 'api/cards'
     );
   }
 
-  update(card: Card): Observable<Card>{
-    return this.http.put<Card>(this.url +'/'+ card.id, card, this.getHttpOptions()).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () => new Error('Todo.update(): error updating todo: ' + err)
-        );
-      })
-    );
+  update(card: Card): Observable<Card> {
+    return this.http
+      .put<Card>(this.url + '/' + card.id, card, this.getHttpOptions())
+      .pipe(
+        catchError((err: any) => {
+          console.log(err);
+          return throwError(
+            () => new Error('Todo.update(): error updating todo: ' + err)
+          );
+        })
+      );
   }
-
 
   // destroy(cardId: number): Observable<void>{
 
@@ -88,6 +95,4 @@ private url = environment.baseUrl + 'api/cards'
     };
     return options;
   }
-
-  }
-
+}

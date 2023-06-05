@@ -1,8 +1,11 @@
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
+import { Filters } from 'src/app/models/filters';
 
 import { CardService } from 'src/app/services/card.service';
+import { CollectionService } from 'src/app/services/collection.service';
 
 @Component({
   selector: 'app-createcard',
@@ -14,10 +17,29 @@ export class CreatecardComponent implements OnInit {
   gradeNumber: number | null = null;
   createNewCard: boolean = false;
   searchBar: boolean = false;
+  allCards: Card[] = [];
+  filters: Filters | null = null;
 
-  constructor(private cardService: CardService, private router: Router) {}
+  constructor(
+    private cardService: CardService,
+    private router: Router,
+    private collectionService: CollectionService
+  ) {}
 
   ngOnInit(): void {}
+
+  getAllCards() {
+    this.searchBar = true;
+    this.cardService.getAllCards().subscribe({
+      next: (data) => {
+        this.allCards = data;
+      },
+      error: (fail) => {
+        console.error('Error reloading');
+        console.error(fail);
+      },
+    });
+  }
 
   addCard(card: Card) {
     console.log(card);
@@ -36,5 +58,40 @@ export class CreatecardComponent implements OnInit {
         console.error(fail);
       },
     });
+  }
+
+  addSearchedCard(searchedCard: Card) {
+    this.collectionService.addSearchedCard(searchedCard).subscribe({
+      next: () => {
+        window.alert('Card added to your collection!');
+      },
+      error: (fail) => {
+        console.error('Error adding card');
+        console.error(fail);
+      },
+    });
+  }
+
+  displaySingleCard(cardId: number) {
+    this.router.navigateByUrl('/singleCardView/' + cardId);
+  }
+
+  handleFiltersSetting(setFilters: Filters | null) {
+    this.filters = setFilters;
+  }
+
+  handleAppliedFiltersSetting(setFilters: Filters | null) {
+    let noFilters = true;
+    this.filters = setFilters;
+    this.getAllCards();
+
+    for (const key in this.filters) {
+      if (this.filters[key]) {
+        noFilters = false;
+      }
+    }
+    if (noFilters) {
+      this.filters = null;
+    }
   }
 }

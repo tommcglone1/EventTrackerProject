@@ -4,8 +4,48 @@
   </div>
 
   <div class="searchButton" *ngIf="!createNewCard && !searchBar">
-    <button (click)="searchBar = true">Search For card</button>
+    <button (click)="getAllCards()">Search For card</button>
   </div>
+</div>
+
+<div *ngIf="searchBar">
+  <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
+  <br />
+  <app-applied-filters
+    [filters]="filters"
+    (changedVariable)="handleAppliedFiltersSetting($event)"
+  ></app-applied-filters>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Add to Collection</th>
+        <th>Card Number</th>
+        <th>Player Name</th>
+        <th>Year</th>
+        <th>Box Set</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let card of allCards | cardType : filters">
+        <td><input type="checkbox" (click)="addSearchedCard(card)" /></td>
+        <td>{{ card.number }}</td>
+        <td>{{ card.playerName }}</td>
+        <td>{{ card.year }}</td>
+        <td>{{ card.boxSet }}</td>
+        <td (click)="displaySingleCard(card.id)">
+          <img
+            class="cardImgTable"
+            src="{{
+              card.imgURL
+                ? card.imgURL
+                : 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
+            }}"
+          />
+        </td>
+        <td><button (click)="displaySingleCard(card.id)">View Card</button></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="styled-Form" *ngIf="createNewCard">
@@ -131,10 +171,4 @@
     </button>
     <hr />
   </form>
-</div>
-
-<div *ngIf="searchBar">
-  <table>
-    <thead></thead>
-  </table>
 </div>
