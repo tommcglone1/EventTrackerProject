@@ -18,6 +18,7 @@ import { CollectionComponent } from './components/collection/collection.componen
 import { CardTypePipe } from './pipes/card-type.pipe';
 import { FilterComponent } from './components/filter/filter.component';
 import { AppliedFiltersComponent } from './components/applied-filters/applied-filters.component';
+import { InCollectionPipe } from './pipes/in-collection.pipe';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AppliedFiltersComponent } from './components/applied-filters/applied-fi
     CardTypePipe,
     FilterComponent,
     AppliedFiltersComponent,
+    InCollectionPipe,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,7 @@ import { AppliedFiltersComponent } from './components/applied-filters/applied-fi
     HttpClientModule,
     NgbModule,
   ],
-  providers: [CardTypePipe],
+  providers: [CardTypePipe, InCollectionPipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -6,7 +6,8 @@ import com.skilldistillery.baseballcards.entities.Card;
 
 public interface CardService {
 
-	List<Card> listAllCards(String username);
+	List<Card> listAllUserCards(String username);
+	List<Card> listAllCards();
 	Card getCard(int cardId, String username);
 	Card create(String username, Card card); 
 	Card update(int cardId, String username, Card card);

@@ -1,4 +1,3 @@
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
@@ -16,9 +15,10 @@ export class CreatecardComponent implements OnInit {
   newCard: Card = new Card();
   gradeNumber: number | null = null;
   createNewCard: boolean = false;
-  searchBar: boolean = false;
+  search: boolean = false;
   allCards: Card[] = [];
   filters: Filters | null = null;
+  userCards: Card[] = [];
 
   constructor(
     private cardService: CardService,
@@ -26,10 +26,24 @@ export class CreatecardComponent implements OnInit {
     private collectionService: CollectionService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reload();
+    this.getAllCards();
+  }
+
+  reload() {
+    this.cardService.index().subscribe({
+      next: (data) => {
+        this.userCards = data;
+      },
+      error: (fail) => {
+        console.error('Error reloading');
+        console.error(fail);
+      },
+    });
+  }
 
   getAllCards() {
-    this.searchBar = true;
     this.cardService.getAllCards().subscribe({
       next: (data) => {
         this.allCards = data;
@@ -64,6 +78,7 @@ export class CreatecardComponent implements OnInit {
     this.collectionService.addSearchedCard(searchedCard).subscribe({
       next: () => {
         window.alert('Card added to your collection!');
+        this.reload();
       },
       error: (fail) => {
         console.error('Error adding card');

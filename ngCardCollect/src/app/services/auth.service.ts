@@ -4,14 +4,14 @@ import { Observable, catchError, throwError, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 import { Buffer } from 'buffer';
+import { Card } from '../models/card';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-
   private url = environment.baseUrl;
+  private cardUrl = environment.baseUrl + 'api/cards';
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +44,8 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
+        localStorage.setItem('userCards', JSON.stringify(newUser.cards));
+
         return newUser;
       }),
       catchError((err: any) => {
@@ -57,6 +59,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
+    localStorage.removeItem('userCards');
   }
 
   getLoggedInUser(): Observable<User> {
@@ -71,16 +74,42 @@ export class AuthService {
         'X-Requested-with': 'XMLHttpRequest',
       },
     };
-    return this.http
-      .get<User>(this.url + 'authenticate', httpOptions)
-      .pipe(
-        catchError((err: any) => {
-          console.log(err);
-          return throwError(
-            () => new Error( 'AuthService.getUserById(): error retrieving user: ' + err )
-          );
-        })
-      );
+    return this.http.get<User>(this.url + 'authenticate', httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'AuthService.getUserById(): error retrieving user: ' + err
+            )
+        );
+      })
+    );
+  }
+
+  getUsersCards(): Observable<Card[]> {
+    if (!this.checkLogin()) {
+      return throwError(() => {
+        new Error('Not logged in.');
+      });
+    }
+    let httpOptions = {
+      headers: {
+        Authorization: 'Basic ' + this.getCredentials(),
+        'X-Requested-with': 'XMLHttpRequest',
+      },
+    };
+    return this.http.get<Card[]>(this.cardUrl, httpOptions).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () =>
+            new Error(
+              'AuthService.getUserById(): error retrieving user: ' + err
+            )
+        );
+      })
+    );
   }
 
   checkLogin(): boolean {
@@ -89,8 +118,6 @@ export class AuthService {
     }
     return false;
   }
-
-
 
   generateBasicAuthCredentials(username: string, password: string): string {
     return Buffer.from(`${username}:${password}`).toString('base64');

@@ -1,14 +1,14 @@
 <div class="buttons">
-  <div class="centerButton" *ngIf="!createNewCard && !searchBar">
+  <div class="centerButton" *ngIf="!createNewCard && !search">
     <button (click)="createNewCard = true">Create Card From Scratch</button>
   </div>
 
-  <div class="searchButton" *ngIf="!createNewCard && !searchBar">
-    <button (click)="getAllCards()">Search For card</button>
+  <div class="searchButton" *ngIf="!createNewCard && !search">
+    <button (click)="search = true">Search For card</button>
   </div>
 </div>
 
-<div *ngIf="searchBar">
+<div *ngIf="search">
   <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
   <br />
   <app-applied-filters
@@ -26,7 +26,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let card of allCards | cardType : filters">
+      <tr
+        *ngFor="
+          let card of allCards | cardType : filters | inCollection : userCards
+        "
+      >
         <td><input type="checkbox" (click)="addSearchedCard(card)" /></td>
         <td>{{ card.number }}</td>
         <td>{{ card.playerName }}</td>

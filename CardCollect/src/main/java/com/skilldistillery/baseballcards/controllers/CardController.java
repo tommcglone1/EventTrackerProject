@@ -31,7 +31,12 @@ public class CardController {
 
 	@GetMapping("cards")
 	public List<Card> getCardList(Principal principal) {
-		return cardService.listAllCards(principal.getName());
+		return cardService.listAllUserCards(principal.getName());
+	}
+	
+	@GetMapping("allCards")
+	public List<Card> getCardList() {
+		return cardService.listAllCards();
 	}
 
 	@GetMapping("cards/{cardId}")

@@ -19,7 +19,7 @@
   </thead>
 
   <tbody>
-    <tr *ngFor="let card of cards | cardType : filters">
+    <tr *ngFor="let card of userCards | cardType : filters">
       <td id="tableClick" (click)="displaySingleCard(card)">
         {{ card.number }}
       </td>

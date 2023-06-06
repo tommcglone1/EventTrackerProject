@@ -12,9 +12,9 @@ import { CollectionService } from 'src/app/services/collection.service';
   styleUrls: ['./collection.component.css'],
 })
 export class CollectionComponent {
-  cards: Card[] = [];
   selected: Card | null = null;
   filters: Filters | null = null;
+  userCards: Card[] = [];
 
   constructor(
     private cardService: CardService,
@@ -26,10 +26,11 @@ export class CollectionComponent {
   ngOnInit() {
     this.reload();
   }
+
   reload() {
     this.cardService.index().subscribe({
       next: (data) => {
-        this.cards = data;
+        this.userCards = data;
       },
       error: (fail) => {
         console.error('Error reloading');
@@ -55,7 +56,7 @@ export class CollectionComponent {
   }
 
   cardCount(): number {
-    return this.cardTypePipe.transform(this.cards, this.filters).length;
+    return this.cardTypePipe.transform(this.userCards, this.filters).length;
   }
 
   handleFiltersSetting(setFilters: Filters | null) {

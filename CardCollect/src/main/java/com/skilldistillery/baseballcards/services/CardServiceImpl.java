@@ -1,16 +1,13 @@
 package com.skilldistillery.baseballcards.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.baseballcards.entities.Card;
-import com.skilldistillery.baseballcards.entities.CardCondition;
-import com.skilldistillery.baseballcards.entities.CardGrade;
 import com.skilldistillery.baseballcards.entities.User;
-import com.skilldistillery.baseballcards.repositories.CardConditionRepository;
-import com.skilldistillery.baseballcards.repositories.CardGradeRepository;
 import com.skilldistillery.baseballcards.repositories.CardRepository;
 import com.skilldistillery.baseballcards.repositories.UserRepository;
 
@@ -24,9 +21,21 @@ public class CardServiceImpl implements CardService {
 	private UserRepository userRepo;
 
 	@Override
-	public List<Card> listAllCards(String username) {
+	public List<Card> listAllUserCards(String username) {
 		return cardRepo.findByUsers_Username(username);
-
+	}
+	
+	@Override
+	public List<Card> listAllCards() {
+		List <Card> cards = cardRepo.findAll();
+		List <Card> visibleCards = new ArrayList<>();
+		
+		for (Card card : cards) {
+			if(card.isActive()) {
+				visibleCards.add(card);
+			}
+	}
+		return visibleCards;
 	}
 
 	@Override
@@ -207,5 +216,7 @@ public class CardServiceImpl implements CardService {
 	public long countByCondition_Id(int conditionId) {
 		return cardRepo.countByCondition_Id(conditionId);
 	}
+
+	
 
 }
