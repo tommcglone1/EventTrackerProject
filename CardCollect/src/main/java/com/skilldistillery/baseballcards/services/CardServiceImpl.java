@@ -40,8 +40,12 @@ public class CardServiceImpl implements CardService {
 
 	@Override
 	public Card getCard(int cardId, String username) {
-		Card card = cardRepo.findByIdAndUsers_Username(cardId, username);
+		User user = userRepo.findByUsername(username);
+		if(user !=null) {
+		Card card = cardRepo.findById(cardId);
 		return card;
+		}
+		return null;
 	}
 
 	@Override

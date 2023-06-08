@@ -23,6 +23,9 @@
     </button>
     <hr />
   </form>
+  <div *ngIf="failedLogin">
+    <p class="alert alert-danger">Invalid username or password</p>
+  </div>
   <div *ngIf="!loggedIn()">
     <button
       id="register-button"

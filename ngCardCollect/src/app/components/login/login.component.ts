@@ -10,20 +10,21 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   loginUser: User = new User();
+  failedLogin: boolean = false;
 
   constructor(private auth: AuthService, private router: Router) {}
   ngOnInit() {}
   login(user: User) {
     console.log('Logging in:');
-    console.log(user);
+
     this.auth.login(user.username, user.password).subscribe({
       next: (loggedInUser) => {
         this.router.navigateByUrl('/profile');
-        this.ngOnInit();
       },
       error: (problem) => {
         console.error('RegisterComponent.register(): Error logging in user:');
         console.error(problem);
+        this.failedLogin = true;
       },
     });
   }
