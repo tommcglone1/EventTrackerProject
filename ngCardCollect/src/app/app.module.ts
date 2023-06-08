@@ -10,7 +10,6 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CreatecardComponent } from './components/createcard/createcard.component';
 import { SingleCardViewComponent } from './components/single-card-view/single-card-view.component';
 import { ProfileComponent } from './components/profile/profile.component';
@@ -19,6 +18,7 @@ import { CardTypePipe } from './pipes/card-type.pipe';
 import { FilterComponent } from './components/filter/filter.component';
 import { AppliedFiltersComponent } from './components/applied-filters/applied-filters.component';
 import { InCollectionPipe } from './pipes/in-collection.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [

@@ -87,8 +87,8 @@ export class CreatecardComponent implements OnInit {
     });
   }
 
-  displaySingleCard(cardId: number) {
-    this.router.navigateByUrl('/singleCardView/' + cardId);
+  displaySingleCard(card: Card) {
+    this.router.navigateByUrl('/singleCardView/' + card.id);
   }
 
   handleFiltersSetting(setFilters: Filters | null) {

@@ -8,6 +8,7 @@
   </div>
 </div>
 
+<!-- search for card -->
 <div *ngIf="search">
   <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
   <br />
@@ -36,7 +37,7 @@
         <td>{{ card.playerName }}</td>
         <td>{{ card.year }}</td>
         <td>{{ card.boxSet }}</td>
-        <td (click)="displaySingleCard(card.id)">
+        <td (click)="displaySingleCard(card)">
           <img
             class="cardImgTable"
             src="{{
@@ -46,12 +47,13 @@
             }}"
           />
         </td>
-        <td><button (click)="displaySingleCard(card.id)">View Card</button></td>
+        <td><button (click)="displaySingleCard(card)">View Card</button></td>
       </tr>
     </tbody>
   </table>
 </div>
 
+<!-- create new card -->
 <div class="styled-Form" *ngIf="createNewCard">
   <button (click)="createNewCard = false">Back</button>
   <h1>Create a Card</h1>
