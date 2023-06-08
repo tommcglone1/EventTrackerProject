@@ -15,6 +15,13 @@ export class CollectionComponent {
   selected: Card | null = null;
   filters: Filters | null = null;
   userCards: Card[] = [];
+  sadPuppy: String =
+    'https://www.cutenessoverflow.com/wp-content/uploads/2016/09/Cute-Sad-Puppy.jpg';
+
+  noImage: String =
+    'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png';
+  cardsInCollection: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private cardService: CardService,
@@ -31,8 +38,13 @@ export class CollectionComponent {
     this.cardService.index().subscribe({
       next: (data) => {
         this.userCards = data;
+        if (this.userCards.length > 0) {
+          this.cardsInCollection = true;
+        }
+        this.loading = false;
       },
       error: (fail) => {
+        this.loading = false;
         console.error('Error reloading');
         console.error(fail);
       },

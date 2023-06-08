@@ -19,6 +19,7 @@ import { FilterComponent } from './components/filter/filter.component';
 import { AppliedFiltersComponent } from './components/applied-filters/applied-filters.component';
 import { InCollectionPipe } from './pipes/in-collection.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     FilterComponent,
     AppliedFiltersComponent,
     InCollectionPipe,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

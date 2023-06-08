@@ -1,0 +1,8 @@
+/* center the spinner border class */
+
+.parentDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

@@ -1,3 +1,5 @@
+<app-loading [isLoading]="loading"></app-loading>
+
 <div class="buttons">
   <div class="centerButton" *ngIf="!createNewCard && !search">
     <button (click)="createNewCard = true">Create Card From Scratch</button>
@@ -9,7 +11,7 @@
 </div>
 
 <!-- search for card -->
-<div *ngIf="search">
+<div *ngIf="search && cardsToAdd">
   <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
   <br />
   <app-applied-filters
@@ -40,17 +42,18 @@
         <td (click)="displaySingleCard(card)">
           <img
             class="cardImgTable"
-            src="{{
-              card.imgURL
-                ? card.imgURL
-                : 'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png'
-            }}"
+            src="{{ card.imgURL ? card.imgURL : noImage }}"
           />
         </td>
         <td><button (click)="displaySingleCard(card)">View Card</button></td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="search && !cardsToAdd">
+  <img width="500px" height="400px" [src]="sadPuppy" />
+  <h3>No new cards to add at this time</h3>
 </div>
 
 <!-- create new card -->

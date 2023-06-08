@@ -19,6 +19,13 @@ export class CreatecardComponent implements OnInit {
   allCards: Card[] = [];
   filters: Filters | null = null;
   userCards: Card[] = [];
+  cardsToAdd: boolean = false;
+  sadPuppy: String =
+    'https://www.cutenessoverflow.com/wp-content/uploads/2016/09/Cute-Sad-Puppy.jpg';
+
+  noImage: String =
+    'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png';
+  loading: boolean = true;
 
   constructor(
     private cardService: CardService,
@@ -27,18 +34,24 @@ export class CreatecardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.reload();
     this.getAllCards();
+    this.reload();
   }
 
   reload() {
     this.cardService.index().subscribe({
       next: (data) => {
         this.userCards = data;
+
+        if (this.allCards.length > this.userCards.length) {
+          this.cardsToAdd = true;
+        }
+        this.loading = false;
       },
       error: (fail) => {
         console.error('Error reloading');
         console.error(fail);
+        this.loading = false;
       },
     });
   }
@@ -47,10 +60,12 @@ export class CreatecardComponent implements OnInit {
     this.cardService.getAllCards().subscribe({
       next: (data) => {
         this.allCards = data;
+        this.loading = false;
       },
       error: (fail) => {
         console.error('Error reloading');
         console.error(fail);
+        this.loading = false;
       },
     });
   }
@@ -78,6 +93,7 @@ export class CreatecardComponent implements OnInit {
     this.collectionService.addSearchedCard(searchedCard).subscribe({
       next: () => {
         window.alert('Card added to your collection!');
+        this.getAllCards();
         this.reload();
       },
       error: (fail) => {
