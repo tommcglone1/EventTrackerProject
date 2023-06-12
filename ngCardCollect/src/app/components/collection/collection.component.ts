@@ -6,6 +6,11 @@ import { Filters } from 'src/app/models/filters';
 import { CardService } from 'src/app/services/card.service';
 import { CollectionService } from 'src/app/services/collection.service';
 
+enum SortDirection {
+  Ascending = 'asc',
+  Descending = 'desc',
+}
+
 @Component({
   selector: 'app-collection',
   templateUrl: './collection.component.html',
@@ -22,6 +27,9 @@ export class CollectionComponent {
     'https://lporegon.org/wp-content/uploads/2019/04/no-picture-provided.png';
   cardsInCollection: boolean = false;
   loading: boolean = true;
+
+  currentSortColumn: keyof Card | null = null;
+  currentSortDirection: SortDirection = SortDirection.Ascending;
 
   constructor(
     private cardService: CardService,
@@ -88,5 +96,36 @@ export class CollectionComponent {
     if (noFilters) {
       this.filters = null;
     }
+  }
+
+  sortTable(column: keyof Card): void {
+    if (column === this.currentSortColumn) {
+      this.currentSortDirection =
+        this.currentSortDirection === SortDirection.Ascending
+          ? SortDirection.Descending
+          : SortDirection.Ascending;
+    } else {
+      this.currentSortColumn = column;
+      this.currentSortDirection = SortDirection.Ascending;
+    }
+
+    this.userCards.sort((a, b) => {
+      const aValue = a?.[column] ?? '';
+      const bValue = b?.[column] ?? '';
+
+      let result: number;
+
+      if (aValue < bValue) {
+        result = -1;
+      } else if (aValue > bValue) {
+        result = 1;
+      } else {
+        result = 0;
+      }
+
+      return this.currentSortDirection === SortDirection.Ascending
+        ? result
+        : -result;
+    });
   }
 }
