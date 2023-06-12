@@ -45,6 +45,15 @@ export class CollectionStatsComponent {
     return total;
   }
 
+  averageCondition() {
+    let total = 0;
+    let cards = this.transformedCards;
+    for (let card of cards) {
+      total += card.condition.id;
+    }
+    return total;
+  }
+
   gradedCount(): number {
     let total = 0;
     let cards = this.transformedCards;
