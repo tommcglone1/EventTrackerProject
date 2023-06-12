@@ -51,7 +51,7 @@ export class CollectionStatsComponent {
     for (let card of cards) {
       total += card.condition.id;
     }
-    return total;
+    return total / this.transformedCards.length;
   }
 
   gradedCount(): number {

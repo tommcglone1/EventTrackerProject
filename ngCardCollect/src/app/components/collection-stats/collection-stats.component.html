@@ -5,6 +5,7 @@
       <th>Sale Value</th>
       <th>Rookie Cards</th>
       <th>Autographed Cards</th>
+      <th>Average Condition of Collection</th>
       <th>Graded Cards</th>
     </tr>
   </thead>
@@ -14,6 +15,7 @@
       <td>{{ saleValue() | currency : "USD" }}</td>
       <td>{{ rookieCount() }}</td>
       <td>{{ autoCount() }}</td>
+      <td>{{ averageCondition() | number : "1.1-2" }}</td>
       <td>{{ gradedCount() }}</td>
     </tr>
   </tbody>
