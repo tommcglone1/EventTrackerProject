@@ -1,59 +1,58 @@
-<div id="cardDetailDiv" *ngIf="selected &&!editCard">
-
-  <h1>Card Number: {{selected.number}}</h1>
-  <img class="cardImgDetailDiv"src={{selected.imgURL}}>
-  <br><br>
-  <button class="btn btn-info" (click)="setEditCard()">Edit Card</button>
+<div id="cardDetailDiv" *ngIf="selected && !editCard">
+  <h1>Card Number: {{ selected.number }}</h1>
+  <img class="cardImgDetailDiv" src="{{ selected.imgURL }}" />
+  <br /><br />
+  <!-- <button class="btn btn-info" (click)="setEditCard()">Edit Card</button> -->
   <table class="table-bordered">
     <tbody>
       <tr>
-        <td>Player Name: </td>
-        <td>{{selected.playerName}}</td>
+        <td>Player Name:</td>
+        <td>{{ selected.playerName }}</td>
       </tr>
 
       <tr *ngIf="selected.team">
-        <td>Team: </td>
-        <td>{{selected.team}}</td>
+        <td>Team:</td>
+        <td>{{ selected.team }}</td>
       </tr>
 
       <tr *ngIf="selected.boxSet">
-        <td>Box Set </td>
-        <td>{{selected.boxSet}}</td>
+        <td>Box Set</td>
+        <td>{{ selected.boxSet }}</td>
       </tr>
 
       <tr *ngIf="selected.type">
-        <td>Type/Variation: </td>
-        <td>{{selected.type}}</td>
+        <td>Type/Variation:</td>
+        <td>{{ selected.type }}</td>
       </tr>
 
       <tr *ngIf="selected.year">
-        <td>Year:  </td>
-        <td>{{selected.year}}</td>
+        <td>Year:</td>
+        <td>{{ selected.year }}</td>
       </tr>
 
       <tr *ngIf="selected.manufacturer">
-        <td>Manufacturer: </td>
-        <td>{{selected.manufacturer}}</td>
+        <td>Manufacturer:</td>
+        <td>{{ selected.manufacturer }}</td>
       </tr>
 
       <tr *ngIf="selected.spNumber">
-        <td>SP Number: </td>
-        <td>{{selected.spNumber}}</td>
+        <td>SP Number:</td>
+        <td>{{ selected.spNumber }}</td>
       </tr>
 
       <tr *ngIf="selected.parallel">
-        <td>Parallel: </td>
-        <td>{{selected.parallel}}</td>
+        <td>Parallel:</td>
+        <td>{{ selected.parallel }}</td>
       </tr>
 
       <tr *ngIf="selected.saleValue">
-        <td>Sale Value: </td>
-        <td>{{selected.saleValue | currency:'USD'}}</td>
+        <td>Sale Value:</td>
+        <td>{{ selected.saleValue | currency : "USD" }}</td>
       </tr>
 
       <tr *ngIf="selected.tradeValue">
-        <td>Trade Value: </td>
-        <td>{{selected.tradeValue | currency:'USD'}}</td>
+        <td>Trade Value:</td>
+        <td>{{ selected.tradeValue | currency : "USD" }}</td>
       </tr>
 
       <tr *ngIf="selected.rookie">
@@ -62,28 +61,24 @@
       </tr>
 
       <tr *ngIf="selected.autographed">
-
-        <td>AutoGraphed: </td>
+        <td>AutoGraphed:</td>
         <td>&#10004;</td>
       </tr>
 
       <tr *ngIf="selected.condition.name">
-        <td>Card Condition:  </td>
-        <td>{{selected.condition.name}}</td>
+        <td>Card Condition:</td>
+        <td>{{ selected.condition.name }}</td>
       </tr>
 
       <tr *ngIf="selected.grade">
         <td>Grade</td>
-        <td>{{selected.grade.id}} {{selected.grade.name}}</td>
+        <td>{{ selected.grade.id }} {{ selected.grade.name }}</td>
       </tr>
-
     </tbody>
   </table>
-
 </div>
 
-
-<div id="cardEdit" *ngIf="editCard">
+<!-- <div id="cardEdit" *ngIf="editCard">
 
   <form *ngIf="editCard">
 
@@ -143,6 +138,6 @@
 
 
 
-  </form>
+  </form> -->
 
-</div>
+<!-- </div> -->

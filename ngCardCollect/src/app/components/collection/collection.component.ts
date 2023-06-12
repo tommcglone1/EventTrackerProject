@@ -75,8 +75,8 @@ export class CollectionComponent {
     this.router.navigateByUrl('/singleCardView/' + card.id);
   }
 
-  cardCount(): number {
-    return this.cardTypePipe.transform(this.userCards, this.filters).length;
+  userCardsTransformed(): Card[] {
+    return this.cardTypePipe.transform(this.userCards, this.filters);
   }
 
   handleFiltersSetting(setFilters: Filters | null) {

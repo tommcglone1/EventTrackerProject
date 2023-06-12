@@ -1,6 +1,9 @@
 <app-loading [isLoading]="loading"></app-loading>
 
-<h1 *ngIf="!loading">Total Cards: {{ cardCount() }}</h1>
+<app-collection-stats
+  [transformedCards]="userCardsTransformed()"
+  *ngIf="cardsInCollection && !loading"
+></app-collection-stats>
 
 <div *ngIf="cardsInCollection && !loading">
   <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>

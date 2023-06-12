@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Card Count</th>
+      <th>Sale Value</th>
+      <th>Rookie Cards</th>
+      <th>Autographed Cards</th>
+      <th>Graded Cards</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{ cardCount() }}</td>
+      <td>{{ saleValue() | currency : "USD" }}</td>
+      <td>{{ rookieCount() }}</td>
+      <td>{{ autoCount() }}</td>
+      <td>{{ gradedCount() }}</td>
+    </tr>
+  </tbody>
+</table>

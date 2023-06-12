@@ -20,6 +20,7 @@ import { AppliedFiltersComponent } from './components/applied-filters/applied-fi
 import { InCollectionPipe } from './pipes/in-collection.pipe';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingComponent } from './components/loading/loading.component';
+import { CollectionStatsComponent } from './components/collection-stats/collection-stats.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LoadingComponent } from './components/loading/loading.component';
     AppliedFiltersComponent,
     InCollectionPipe,
     LoadingComponent,
+    CollectionStatsComponent,
   ],
   imports: [
     BrowserModule,
