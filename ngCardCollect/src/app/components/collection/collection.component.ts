@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
 import { Filters } from 'src/app/models/filters';
+import { AuthService } from 'src/app/services/auth.service';
 import { CardService } from 'src/app/services/card.service';
 import { CollectionService } from 'src/app/services/collection.service';
 

@@ -8,6 +8,11 @@ import { Card } from 'src/app/models/card';
 })
 export class CollectionStatsComponent {
   @Input() transformedCards: Card[] = [];
+  username: string | null = '';
+
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+  }
 
   cardCount(): number {
     return this.transformedCards.length;

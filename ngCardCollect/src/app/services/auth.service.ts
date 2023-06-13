@@ -11,7 +11,7 @@ import { Card } from '../models/card';
 })
 export class AuthService {
   private url = environment.baseUrl;
-  private cardUrl = environment.baseUrl + 'api/cards';
+  // private cardUrl = environment.baseUrl + 'api/cards';
 
   constructor(private http: HttpClient) {}
 
@@ -44,7 +44,8 @@ export class AuthService {
         // While credentials are stored in browser localStorage, we consider
         // ourselves logged in.
         localStorage.setItem('credentials', credentials);
-        localStorage.setItem('userCards', JSON.stringify(newUser.cards));
+        localStorage.setItem('username', newUser.username);
+        // localStorage.setItem('userCards', JSON.stringify(newUser.cards));
 
         return newUser;
       }),
@@ -59,7 +60,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('credentials');
-    localStorage.removeItem('userCards');
+    localStorage.removeItem('username');
   }
 
   getLoggedInUser(): Observable<User> {
@@ -87,30 +88,30 @@ export class AuthService {
     );
   }
 
-  getUsersCards(): Observable<Card[]> {
-    if (!this.checkLogin()) {
-      return throwError(() => {
-        new Error('Not logged in.');
-      });
-    }
-    let httpOptions = {
-      headers: {
-        Authorization: 'Basic ' + this.getCredentials(),
-        'X-Requested-with': 'XMLHttpRequest',
-      },
-    };
-    return this.http.get<Card[]>(this.cardUrl, httpOptions).pipe(
-      catchError((err: any) => {
-        console.log(err);
-        return throwError(
-          () =>
-            new Error(
-              'AuthService.getUserById(): error retrieving user: ' + err
-            )
-        );
-      })
-    );
-  }
+  // getUsersCards(): Observable<Card[]> {
+  //   if (!this.checkLogin()) {
+  //     return throwError(() => {
+  //       new Error('Not logged in.');
+  //     });
+  //   }
+  //   let httpOptions = {
+  //     headers: {
+  //       Authorization: 'Basic ' + this.getCredentials(),
+  //       'X-Requested-with': 'XMLHttpRequest',
+  //     },
+  //   };
+  //   return this.http.get<Card[]>(this.cardUrl, httpOptions).pipe(
+  //     catchError((err: any) => {
+  //       console.log(err);
+  //       return throwError(
+  //         () =>
+  //           new Error(
+  //             'AuthService.getUserById(): error retrieving user: ' + err
+  //           )
+  //       );
+  //     })
+  //   );
+  // }
 
   checkLogin(): boolean {
     if (localStorage.getItem('credentials')) {
