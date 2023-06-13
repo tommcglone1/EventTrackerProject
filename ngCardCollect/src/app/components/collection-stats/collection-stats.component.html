@@ -6,7 +6,22 @@
       <th>Sale Value</th>
       <th>Rookie Cards</th>
       <th>Autographed Cards</th>
-      <th>Average Condition of Collection</th>
+      <th>
+        Average Condition of Collection
+        <div
+          class="info-container"
+          (mouseenter)="showInfo()"
+          (mouseleave)="hideInfo()"
+        >
+          <span class="info-icon">?</span>
+          <div class="info-content" *ngIf="isVisible">
+            <p>
+              This is an average of the conditions you have chosen for your
+              cards. 1 being pristine and 5 being poor.
+            </p>
+          </div>
+        </div>
+      </th>
       <th>Graded Cards</th>
     </tr>
   </thead>

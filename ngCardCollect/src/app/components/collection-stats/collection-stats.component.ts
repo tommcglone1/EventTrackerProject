@@ -9,9 +9,16 @@ import { Card } from 'src/app/models/card';
 export class CollectionStatsComponent {
   @Input() transformedCards: Card[] = [];
   username: string | null = '';
+  isVisible: boolean = false;
 
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
+  }
+  hideInfo() {
+    this.isVisible = false;
+  }
+  showInfo() {
+    this.isVisible = true;
   }
 
   cardCount(): number {

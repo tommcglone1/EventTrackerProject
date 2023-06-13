@@ -1,0 +1,24 @@
+.info-container {
+  position: relative;
+  display: inline-block;
+}
+
+.info-icon {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  padding: 5px;
+}
+
+.info-content {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 200px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
