@@ -20,12 +20,32 @@ public class UserServiceImpl implements UserService {
 	public boolean addCardToCollection(String username, Card card) {
 		boolean added = false;
 		Card newCard = new Card();
-		System.out.println(card);
+		
 		User user = userRepo.findByUsername(username);
 		if (user != null) {
-			
-			System.out.println(card);
-			user.addCard(card);
+			if (card != null) {
+				
+				newCard.setPlayerName(card.getPlayerName());
+				newCard.setNumber(card.getNumber());
+				newCard.setTeam(card.getTeam());
+				newCard.setBoxSet(card.getBoxSet());
+				newCard.setType(card.getType());
+				newCard.setImgURL(card.getImgURL());
+				newCard.setYear(card.getYear());
+				newCard.setAutographed(card.getAutographed());
+				newCard.setManufacturer(card.getManufacturer());
+				newCard.setSaleValue(card.getSaleValue());
+				newCard.setTradeValue(card.getTradeValue());
+				newCard.setActive(card.isActive());
+				newCard.setSpNumber(card.getSpNumber());
+				newCard.setParallel(card.getParallel());
+				newCard.setCondition(card.getCondition());
+				
+				newCard.setGrade(card.getGrade());
+				cardRepo.saveAndFlush(newCard);
+				
+			}
+			user.addCard(newCard);
 			userRepo.saveAndFlush(user);
 			added = true;
 		}

@@ -10,7 +10,12 @@ export class InCollectionPipe implements PipeTransform {
     for (let i = 0; i < allCards.length; i++) {
       let match = false;
       for (let j = 0; j < userCards.length; j++) {
-        if (allCards[i].id === userCards[j].id) {
+        if (
+          allCards[i].playerName === userCards[j].playerName &&
+          allCards[i].year === userCards[j].year &&
+          allCards[i].boxSet === userCards[j].boxSet &&
+          allCards[i].number === userCards[j].number
+        ) {
           match = true;
         }
       }
