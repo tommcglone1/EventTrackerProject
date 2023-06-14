@@ -1,17 +1,19 @@
 <app-loading [isLoading]="loading"></app-loading>
 
+<!--button overaly on original page-->
 <div class="buttons">
-  <div class="centerButton" *ngIf="!createNewCard && !search">
+  <div class="centerButton" *ngIf="!createNewCard && !search && !loading">
     <button (click)="createNewCard = true">Create Card From Scratch</button>
   </div>
 
-  <div class="searchButton" *ngIf="!createNewCard && !search">
+  <div class="searchButton" *ngIf="!createNewCard && !search && !loading">
     <button (click)="search = true">Search For card</button>
   </div>
 </div>
 
 <!-- search for card -->
 <div *ngIf="search && cardsToAdd">
+  <button (click)="search = false">Back</button> <br />
   <app-filter (changedVariable)="handleFiltersSetting($event)"></app-filter>
   <br />
   <app-applied-filters

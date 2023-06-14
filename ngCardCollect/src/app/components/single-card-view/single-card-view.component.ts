@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Card } from 'src/app/models/card';
 import { CardService } from 'src/app/services/card.service';
+import { CollectionService } from 'src/app/services/collection.service';
 
 @Component({
   selector: 'app-single-card-view',
@@ -12,14 +13,18 @@ export class SingleCardViewComponent {
   selected: Card | null = null;
   gradeNumber: number | null = null;
   editCard: Card | null = null;
+  source: string | null = null;
 
   constructor(
     private currentRoute: ActivatedRoute,
-    private cardService: CardService
+    private cardService: CardService,
+    private collectionService: CollectionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     let cardId = this.currentRoute.snapshot.paramMap.get('cardId');
+    this.source = this.currentRoute.snapshot.paramMap.get('source');
     if (cardId) {
       this.findCardById(parseInt(cardId));
     }
@@ -32,6 +37,19 @@ export class SingleCardViewComponent {
       },
       error: (err) => {
         console.error(err);
+      },
+    });
+  }
+
+  addSearchedCard(searchedCard: Card) {
+    this.collectionService.addSearchedCard(searchedCard).subscribe({
+      next: () => {
+        window.alert('Card added to your collection!');
+        this.router.navigateByUrl('/createcard');
+      },
+      error: (fail) => {
+        console.error('Error adding card');
+        console.error(fail);
       },
     });
   }

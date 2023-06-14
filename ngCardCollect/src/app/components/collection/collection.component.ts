@@ -73,7 +73,7 @@ export class CollectionComponent {
   }
 
   displaySingleCard(card: Card) {
-    this.router.navigateByUrl('/singleCardView/' + card.id);
+    this.router.navigateByUrl('/singleCardView/' + card.id + '/view');
   }
 
   userCardsTransformed(): Card[] {

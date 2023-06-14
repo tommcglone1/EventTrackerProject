@@ -16,6 +16,22 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	CardRepository cardRepo;
 	
+	@Override
+	public boolean addCardToCollection(String username, Card card) {
+		boolean added = false;
+		Card newCard = new Card();
+		System.out.println(card);
+		User user = userRepo.findByUsername(username);
+		if (user != null) {
+			
+			System.out.println(card);
+			user.addCard(card);
+			userRepo.saveAndFlush(user);
+			added = true;
+		}
+		
+		return added;
+	}
 	
 
 	@Override
@@ -34,17 +50,5 @@ public class UserServiceImpl implements UserService {
 
 
 
-	@Override
-	public boolean addCardToCollection(String username, Card card) {
-		boolean added = false;
-		User user = userRepo.findByUsername(username);
-		if (user != null) {
-			user.addCard(card);
-			userRepo.saveAndFlush(user);
-			 added = true;
-		}
-		
-		return added;
-	}
 
 }

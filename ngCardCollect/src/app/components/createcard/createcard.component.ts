@@ -106,7 +106,7 @@ export class CreatecardComponent implements OnInit {
   displaySingleCard(card: Card) {
     console.log(card);
     console.log(card.id);
-    this.router.navigateByUrl('/singleCardView/' + card.id);
+    this.router.navigateByUrl('/singleCardView/' + card.id + '/addable');
   }
 
   handleFiltersSetting(setFilters: Filters | null) {

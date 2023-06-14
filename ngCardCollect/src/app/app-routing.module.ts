@@ -14,7 +14,10 @@ const routes: Routes = [
   { path: 'createcard', component: CreatecardComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'collection', component: CollectionComponent },
-  { path: 'singleCardView/:cardId', component: SingleCardViewComponent },
+  {
+    path: 'singleCardView/:cardId/:source',
+    component: SingleCardViewComponent,
+  },
   //add not found component
 ];
 

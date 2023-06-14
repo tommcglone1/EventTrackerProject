@@ -78,6 +78,10 @@
   </table>
 </div>
 
+<div *ngIf="selected && source === 'addable'">
+  <button (click)="addSearchedCard(selected)">Add to Collection</button>
+</div>
+
 <!-- <div id="cardEdit" *ngIf="editCard">
 
   <form *ngIf="editCard">

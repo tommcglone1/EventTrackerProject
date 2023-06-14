@@ -33,7 +33,6 @@ public class UserController {
 			HttpServletResponse res,
 			@RequestBody Card card) {
 		
-		
 		try {
 			if (userService.addCardToCollection(principal.getName(), card)) {
 				res.setStatus(200);
